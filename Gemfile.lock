@@ -59,6 +59,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -115,7 +116,7 @@ GEM
       activesupport (= 4.2.5.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.1.1)
+    rake (10.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
     rspec-core (3.4.3)
@@ -185,6 +186,7 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.1.0)
+  database_cleaner
   jbuilder (~> 2.0)
   jquery-rails
   launchy
