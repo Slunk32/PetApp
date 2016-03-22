@@ -9,7 +9,7 @@
       <th>Breed</th>
       <th>Size</th>
       <th>Age</th>
-      <th>Personality</th>
+      <!-- <th>Personality</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td><%= pet.breed %></td>
         <td><%= pet.size %></td>
         <td><%= pet.age %></td>
-        <td><%= pet.personality %></td>
+        <!-- <td><%# @pet.personality.trait %></td> -->
         <td><%= link_to 'Show', pet %></td>
         <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
         <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

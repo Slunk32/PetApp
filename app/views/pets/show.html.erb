@@ -20,10 +20,6 @@
   <%= @pet.age %>
 </p>
 
-<p>
-  <strong>Personality:</strong>
-  <%= @pet.personality %>
-</p>
-
+<%= link_to 'New Personality', new_pet_personality_path(@pet) %> |
 <%= link_to 'Edit', edit_pet_path(@pet) %> |
 <%= link_to 'Back', pets_path %>
