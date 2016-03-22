@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Trait:</strong>
+  <%= @personality.trait %>
+</p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @personality.pet.name %>
+</p>
+
+<%= link_to 'Edit', edit_personality_path(@personality) %> |
+<%= link_to 'Back', personalities_path %>
