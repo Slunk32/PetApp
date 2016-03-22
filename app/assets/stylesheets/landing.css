@@ -1,0 +1,54 @@
+
+.poochlogo {
+  text-align: center;
+  margin-top: -15%;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2vw;
+}
+
+p {
+  text-align: center;
+}
+
+.row {
+  padding: 15%;
+  max-height: 550px;
+  width: auto;
+}
+
+body {
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+
+.buttons {
+  margin: 0 auto;
+  margin-top: 10%;
+  text-align: center;
+  width: 40%;
+}
+
+.btn1 {
+  float: left;
+  margin-right: auto;
+  font-size: 2vw;
+}
+
+.btn2 {
+  float: right;
+  margin-right: auto;
+  font-size: 2vw;
+}
+
+.container {
+  border-radius: 1%;
+  border: 6px solid #000000;
+  background-color: #ffffff;
+}
