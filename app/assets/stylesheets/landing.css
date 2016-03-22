@@ -18,7 +18,7 @@ p {
 }
 
 .row {
-  padding: 15%;
+  padding: 20%;
   max-height: 550px;
   width: auto;
 }
@@ -39,16 +39,18 @@ body {
   float: left;
   margin-right: auto;
   font-size: 2vw;
+  border: 3px solid black;
 }
 
 .btn2 {
   float: right;
   margin-right: auto;
   font-size: 2vw;
+  border: 3px solid black;
 }
 
 .container {
   border-radius: 1%;
-  border: 6px solid #000000;
+  border: 5px solid #000000;
   background-color: #ffffff;
 }
