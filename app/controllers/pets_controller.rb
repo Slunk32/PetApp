@@ -14,7 +14,7 @@ class PetsController < ApplicationController
 
   # GET /pets/new
   def new
-    @pet = Pet.new
+    @pet = current_user.pets.build
   end
 
   # GET /pets/1/edit
@@ -24,7 +24,7 @@ class PetsController < ApplicationController
   # POST /pets
   # POST /pets.json
   def create
-    @pet = Pet.new(pet_params)
+    @pet = current_user.pets.build(pet_params)
 
     respond_to do |format|
       if @pet.save

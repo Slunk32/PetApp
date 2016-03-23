@@ -19,8 +19,8 @@
           <h2><i class="fa fa-paw"></i> Therapy Animals to Improve your Health & Mood <i class="fa fa-paw"></i></h2>
         <!--The div class we created to house our buttons-->
         <div class="buttons">
-          <button type="button" class="btn btn1 btn-success">Register</button>
-          <button type="button" class="btn btn2 btn-success">Sign-In</button>
+          <%= link_to '<button type="button" class="btn btn2 btn-success">Sign In</button>'.html_safe, new_user_session_path, :id => "button_id", :class => "button_class" %>
+          <%= link_to '<button type="button" class="btn btn2 btn-success">Register</button>'.html_safe, new_user_registration_path, :id => "button_id", :class => "button_class" %>
         </div>
       </div>
     </div>
