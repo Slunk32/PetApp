@@ -14,7 +14,7 @@ RSpec.feature "PetsApis", type: :feature do
     # Tests for visiting and making a new dog
     it "should visit the pets listing page" do
       register
-      expect(page).to have_content('Listing Pets')
+      expect(page).to have_content('Pet Listing')
     end
 
     it 'will allow me to create a dog' do

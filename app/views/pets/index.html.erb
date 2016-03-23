@@ -1,7 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pooch</title>
+    <!--The link for our css called listing.css-->
+    <link type="text/css" rel="stylesheet" href="listing.scss"/>
+  </head>
+  <body>
+
+
+  <!-- This is our navbar-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+        <a class="navbar-brand" href="#"><i class="fa fa-paw"></i> POOCH</a>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Listings</a></li>
+          <li><a href="#">Pets</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Pets</h1>
 
+<h1>Pet Listing</h1>
+<hr>
+<div class="petlisting">
 <table>
   <thead>
     <tr>
@@ -22,14 +51,15 @@
         <td><%= pet.size %></td>
         <td><%= pet.age %></td>
         <!-- <td><%# @pet.personality.trait %></td> -->
-        <td><%= link_to 'Show', pet %></td>
-        <td><%= link_to 'Edit', edit_pet_path(pet) %></td>
-        <td><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="action"><%= link_to 'Show', pet %></td>
+        <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
+        <td class="action"><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
+<span class="newpet"><%= link_to 'New Pet', new_pet_path%></span>
+</div>
 
-<%= link_to 'New Pet', new_pet_path %>
+</body>
