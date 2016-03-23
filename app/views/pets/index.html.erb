@@ -25,9 +25,6 @@
       </div>
     </nav>
 
-<p id="notice"><%= notice %></p>
-
-
 <h1>Pet Listing</h1>
 <hr>
 <div class="petlisting">
@@ -59,7 +56,12 @@
   </tbody>
 </table>
 <br>
-<span class="newpet"><%= link_to 'New Pet', new_pet_path%></span>
+<div class="btn btn-lg btn-default">
+  <%= link_to 'New Pet', new_pet_path %>
 </div>
 
+
+
 </body>
+
+<p id="notice"><%= notice %></p>
