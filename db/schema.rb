@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20160322182949) do
     t.string   "breed"
     t.string   "size"
     t.string   "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "personality"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_foreign_key "personalities", "pets"
