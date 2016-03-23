@@ -15,13 +15,23 @@
         <div class="poochlogo">
           <%=image_tag("poochlogo.gif",class: "img-responsive")%>
         </div>
+
           <!--The content below our logo with the fa-paw icons-->
           <h2><i class="fa fa-paw"></i> Therapy Animals to Improve your Health & Mood <i class="fa fa-paw"></i></h2>
+
         <!--The div class we created to house our buttons-->
-        <div class="buttons">
-          <%= link_to '<button type="button" class="btn btn2 btn-success">Sign In</button>'.html_safe, new_user_session_path, :id => "button_id", :class => "button_class" %>
-          <%= link_to '<button type="button" class="btn btn2 btn-success">Register</button>'.html_safe, new_user_registration_path, :id => "button_id", :class => "button_class" %>
+        <div class="btn">
+          <div class="btn btn-lg btn-success">
+            <%= link_to 'Register', new_user_registration_path %>
+          </div>
         </div>
+
+        <div class="btn">
+          <div class="btn btn-lg btn-success">
+            <%= link_to 'Sign In', new_user_session_path %>
+          </div>
+        </div>
+
       </div>
     </div>
   </body>
