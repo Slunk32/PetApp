@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_scope :user do
-    
-  end
-
   devise_for :users
-  get 'welcome/index'
+   get 'welcome/index'
 
   resources :personalities, except: [:new, :create]
   resources :pets do
@@ -15,7 +11,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'pets#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

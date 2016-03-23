@@ -1,5 +1,14 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth
+  skip_before_action :authenticate_user!
+
+
+  def check_auth
+      unless user_signed_in?
+          redirect_to welcome_index_path
+      end
+  end
 
   # GET /pets
   # GET /pets.json
