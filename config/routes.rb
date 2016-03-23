@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  resources :pets
+  resources :personalities, except: [:new, :create]
+  resources :pets do
+    resources :personalities, only: [:new, :create, :update]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
