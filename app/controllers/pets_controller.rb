@@ -1,5 +1,14 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth
+  skip_before_action :authenticate_user!
+
+
+  def check_auth
+      unless user_signed_in?
+          redirect_to welcome_index_path
+      end
+  end
 
   # GET /pets
   # GET /pets.json
@@ -14,7 +23,7 @@ class PetsController < ApplicationController
 
   # GET /pets/new
   def new
-    @pet = Pet.new
+    @pet = current_user.pets.build
   end
 
   # GET /pets/1/edit
@@ -24,7 +33,7 @@ class PetsController < ApplicationController
   # POST /pets
   # POST /pets.json
   def create
-    @pet = Pet.new(pet_params)
+    @pet = current_user.pets.build(pet_params)
 
     respond_to do |format|
       if @pet.save
