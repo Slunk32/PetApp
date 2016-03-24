@@ -1,4 +1,3 @@
-
 <!--div class container which contains all our landing page content-->
 <div class="container">
   <!--The div for our row-->
@@ -14,17 +13,8 @@
 
     <!--The div class we created to house our buttons-->
     <div class="rowbuttons">
-      <div class="btn">
-        <div class="btn btn-lg btn-success">
-          <%= link_to 'Register', new_user_registration_path %>
-        </div>
-      </div>
-
-      <div class="btn">
-        <div class="btn btn-lg btn-success">
-          <%= link_to 'Sign In', new_user_session_path %>
-        </div>
-      </div>
+      <%= link_to 'Register', new_user_registration_path, :class => "btn btn-lg btn-success" %>
+      <%= link_to 'Log In', new_user_session_path, :class => "btn btn-lg btn-success" %>
     </div>
   </div>
 </div>
