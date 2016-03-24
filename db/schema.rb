@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 20160323173545) do
     t.string   "name"
     t.string   "breed"
     t.string   "size"
-    t.string   "age"
-    t.string   "personality"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "age"
+    t.integer  "zipcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 

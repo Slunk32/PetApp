@@ -2,6 +2,7 @@ class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
   before_action :check_auth
   skip_before_action :authenticate_user!
+  helper_method :sort_column, :sort_direction
 
 
   def check_auth
@@ -13,9 +14,15 @@ class PetsController < ApplicationController
   # GET /pets
   # GET /pets.json
   def index
-    @pets = Pet.all
-  end
+      @pets = Pet.order(sort_column + " " + sort_direction)
+    end
+    def sort_column
+       Pet.column_names.include?(params[:sort]) ? params[:sort] : "name"
+     end
 
+     def sort_direction
+       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+     end
   # GET /pets/1
   # GET /pets/1.json
   def show
@@ -34,6 +41,8 @@ class PetsController < ApplicationController
   # POST /pets.json
   def create
     @pet = current_user.pets.build(pet_params)
+    @pet.name = @pet.name.capitalize
+    @pet.breed = @pet.breed.capitalize
 
     respond_to do |format|
       if @pet.save
@@ -79,6 +88,6 @@ class PetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pet_params
-      params.require(:pet).permit(:name, :breed, :size, :age, :personality)
+      params.require(:pet).permit(:name, :breed, :size, :age, :zipcode)
     end
 end
