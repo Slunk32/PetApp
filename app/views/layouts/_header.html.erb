@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-        <li class="active"><a href="pets">View Pets<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="/pets">View Pets<span class="sr-only">(current)</span></a></li>
         <li><a href="#">Contact</a></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
