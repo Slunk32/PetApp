@@ -16,12 +16,16 @@ li a:hover {
   color: white;
 }
 
-.newpet {
+.btn-default {
   float: right;
   margin-right: 10%;
   font-family: "Roboto";
   font-size: 15pt;
 }
+
+// .notice {
+//   margin-top: 80%;
+// }
 
 table {
   width: 80%;
@@ -46,10 +50,11 @@ div.table-title {
 }
 
 h1 {
-  margin-top: -5%;
   margin-bottom: 4%;
-  font-style: "Roboto";
+  font-family: 'Oleo Script', cursive;
   color: black;
+  text-shadow: 3px 3px white;
+  font-size: 50pt;
 }
 
 

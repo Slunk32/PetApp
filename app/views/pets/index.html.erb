@@ -7,57 +7,43 @@
     <link type="text/css" rel="stylesheet" href="listing.scss"/>
   </head>
   <body>
+    <h1>Pet Listing</h1>
+    <hr>
+    <div class="petlisting">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Breed</th>
+          <th>Size</th>
+          <th>Age</th>
+          <!-- <th>Personality</th> -->
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @pets.each do |pet| %>
+          <tr>
+            <td><%= pet.name %></td>
+            <td><%= pet.breed %></td>
+            <td><%= pet.size %></td>
+            <td><%= pet.age %></td>
+            <!-- <td><%# @pet.personality.trait %></td> -->
+            <td class="action"><%= link_to 'Show', pet %></td>
+            <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
+            <td class="action"><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div class="btn btn-lg btn-default">
+      <%= link_to 'New Pet', new_pet_path %>
+    </div>
 
 
-  <!-- This is our navbar-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand"><i class="fa fa-paw"></i> POOCH</a>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="pets">View Pets<span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Contact</a></li>
-          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-<p id="notice"><%= notice %></p>
-
-
-<h1>Pet Listing</h1>
-<hr>
-<div class="petlisting">
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Breed</th>
-      <th>Size</th>
-      <th>Age</th>
-      <!-- <th>Personality</th> -->
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pets.each do |pet| %>
-      <tr>
-        <td><%= pet.name %></td>
-        <td><%= pet.breed %></td>
-        <td><%= pet.size %></td>
-        <td><%= pet.age %></td>
-        <!-- <td><%# @pet.personality.trait %></td> -->
-        <td class="action"><%= link_to 'Show', pet %></td>
-        <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
-        <td class="action"><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<span class="newpet"><%= link_to 'New Pet', new_pet_path%></span>
-</div>
 
 </body>
+
+<p id="notice"><%= notice %></p>
