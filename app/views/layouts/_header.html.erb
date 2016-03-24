@@ -2,18 +2,17 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-      <a class="navbar-brand" href="/"><i class="fa fa-paw"></i> POOCH</a>
-      <ul class="nav navbar-nav">
-        <% if user_signed_in? %>
-        <li class="active"><a href="pets">View Pets<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Contact</a></li>
-        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-        <% else %>
-        <li><%= link_to "Sign up", new_user_registration_path %></li>
-        <li><%= link_to "Sign in", new_user_session_path %></li>
-        <li><a href="#">Contact</a></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <a class="navbar-brand" href="/"><i class="fa fa-paw"></i> POOCH</a>
+    <ul class="nav navbar-nav">
+      <% if user_signed_in? %>
+      <li class="active"><a href="pets">View Pets<span class="sr-only">(current)</span></a></li>
+      <li><a href="#">Contact</a></li>
+      <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+      <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><a href="#">Contact</a></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
