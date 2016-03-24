@@ -19,15 +19,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <%= render 'layouts/header' %>
-    <%= yield %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <%= render 'layouts/header' %>
+  <%= yield %>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 <!-- <div>
-  <p class="notice"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 </br>
-  <p class="alert"><%= alert %></p>
+<p class="alert"><%= alert %></p>
 </br>
 </div> -->
 </html>
