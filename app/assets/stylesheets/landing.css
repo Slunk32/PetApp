@@ -42,14 +42,14 @@ body {
 }
 
 a:hover {
-  color: black;
+  color: rgb(82, 82, 82);
   text-decoration: none;
 }
 
 .btn-success {
   margin-right: 10px;
   font-size: 2vw;
-  border: 3px solid black;
+  border: 3px solid rgb(82, 82, 82);
 }
 
 /*.btn-success {
@@ -60,6 +60,6 @@ a:hover {
 
 .container {
   border-radius: 1%;
-  border: 5px solid #000000;
+  border: 5px solid rgb(82, 82, 82);
   background-color: #FCFCFC;
 }
