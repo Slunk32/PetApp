@@ -1,44 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Registration</title>
-    <!--This is the link for our stylesheet-->
-    <link type="text/css" rel="stylesheet" href="stylesheets/registration.css"/>
-  </head>
-  <body>
-    <h2 id="headingfont">Sign up</h2>
-    <hr>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
-    <div class="signup-wrap">
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
-      </div>
-      <!-- These are the registration input forms-->
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
-      </div>
+<h2 id="headingfont">Sign up</h2>
+<hr>
 
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+<div class="signup-wrap">
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <!-- These are the registration input forms-->
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
 
-      <div class="actions">
-        <%= f.submit "Sign up" %>
-      </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
 
-      <% end %>
-      <div class="field">
-        <%= render "devise/shared/links", :id => "login-link"%>
-      </div>
-    </div>
-  </body>
-</html>
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+
+  <% end %>
+  <div class="field">
+    <%= render "devise/shared/links", :id => "login-link"%>
+  </div>
+</div>

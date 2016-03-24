@@ -2,7 +2,7 @@
   margin-top: -2.5%;
   margin-bottom: 4%;
   font-family: 'Oleo Script', cursive;
-  color: black;
+  color: rgb(82,82,82);
   text-shadow: 3px 3px white;
   font-size: 50pt;
   text-align: center;
@@ -42,7 +42,7 @@ button:focus {
   border-radius: 5%;
   padding-top: 5%;
   margin-top: 80px;
-  border: 3px solid black;
+  border: 3px solid rgb(82,82,82);
 }
 
 #user_email {

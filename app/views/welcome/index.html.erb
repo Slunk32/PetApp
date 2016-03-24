@@ -1,39 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Landing Page</title>
-    <!--Linke for our CSS stylesheet called "landing.css"-->
-    <link type="text/css" rel="stylesheet" href="stylesheets/landing.css"/>
-  </head>
-  <body>
-    <!--div class container which contains all our landing page content-->
-    <div class="container">
-    <!--The div for our row-->
-      <div class="row">
-        <!--The div which contains our logo-->
-        <div class="poochlogo">
-          <%=image_tag("poochlogo.gif",class: "img-responsive")%>
-        </div>
-
-          <!--The content below our logo with the fa-paw icons-->
-
-          <h2 id="subtitle">Therapy Animals to Improve your Health & Mood</h2>
-
-        <!--The div class we created to house our buttons-->
-        <div class="rowbuttons">
-        <div class="btn">
-          <div class="btn btn-lg btn-success">
-            <%= link_to 'Register', new_user_registration_path %>
-          </div>
-        </div>
-
-        <div class="btn">
-          <div class="btn btn-lg btn-success">
-            <%= link_to 'Sign In', new_user_session_path %>
-          </div>
-        </div>
-      </div>
+<!--div class container which contains all our landing page content-->
+<div class="container">
+  <!--The div for our row-->
+  <div class="row">
+    <!--The div which contains our logo-->
+    <div class="poochlogo">
+      <%=image_tag("poochlogo.gif",class: "img-responsive")%>
     </div>
-  </body>
-</html>
+
+    <!--The content below our logo with the fa-paw icons-->
+
+    <h2 id="subtitle">Therapy Animals to Improve your Health & Mood</h2>
+
+    <!--The div class we created to house our buttons-->
+    <div class="rowbuttons">
+      <%= link_to 'Register', new_user_registration_path, :class => "btn btn-lg btn-success" %>
+      <%= link_to 'Log In', new_user_session_path, :class => "btn btn-lg btn-success" %>
+    </div>
+  </div>
+</div>
