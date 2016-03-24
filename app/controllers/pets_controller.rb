@@ -41,6 +41,8 @@ class PetsController < ApplicationController
   # POST /pets.json
   def create
     @pet = current_user.pets.build(pet_params)
+    @pet.name = @pet.name.capitalize
+    @pet.breed = @pet.breed.capitalize
 
     respond_to do |format|
       if @pet.save
@@ -86,6 +88,6 @@ class PetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pet_params
-      params.require(:pet).permit(:name, :breed, :size, :age, :personality)
+      params.require(:pet).permit(:name, :breed, :size, :age, :zipcode)
     end
 end
