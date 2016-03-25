@@ -18,7 +18,7 @@
     <tbody>
       <% @pets.each do |pet| %>
       <tr>
-        <td><%= link_to image_tag(pet.image.url(:small)), pet.image.url %></td>
+        <td><%= link_to image_tag(pet.image.url(:large)), pet.image.url, :class => "animalimg"%></td>
         <td><%= pet.name %></td>
         <td><%= pet.breed %></td>
         <td><%= pet.size %></td>
@@ -39,6 +39,7 @@
     </tbody>
   </table>
   <br>
-    <%= link_to 'New Pet', new_pet_path, :class => "btn btn-lg btn-default"%>
+    <!-- commented new pet button just in case we want to use it later -->
+    <!-- <%= link_to 'New Pet', new_pet_path, :class => "btn btn-lg btn-default"%> -->
   <p id="notice"><%= notice %></p>
 </div>
