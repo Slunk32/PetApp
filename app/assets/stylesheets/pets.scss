@@ -4,3 +4,57 @@
 h1 {
   color: rgb(82,82,82);
 }
+
+#pet_image {
+  margin: 0 auto;
+}
+
+p > a > img {
+  border: 2px solid rgb(82,82,82);
+}
+
+.link-wrap {
+  text-align: center;
+}
+/*This section is the styling for our pet input form*/
+#pet_name {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+}
+
+#pet_breed {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+}
+
+#pet_size {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+  width: 100px;
+}
+
+#pet_age {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+  width: 40px;
+}
+
+#pet_zipcode {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+  width: 80px;
+}
+
+.disabled-links {
+  color: rgb(82,82,82);
+}

@@ -1,15 +1,4 @@
-<%= form_for(@pet) do |f| %>
-  <% if @pet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
-
-      <ul>
-      <% @pet.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for @pet, html: {multipart: true} do |f| %>
 
   <div class="field">
     <%= f.label :name %><br>
@@ -30,6 +19,10 @@
   <div class="field">
     <%= f.label :zipcode %><br>
     <%= f.text_field :zipcode %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
   </div>
   <!-- <div class="field">
     <%= f.label :personality %><br>
