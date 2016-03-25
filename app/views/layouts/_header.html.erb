@@ -23,7 +23,9 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Your Profile</a></li>
-          <li><a href="#">Pets</a></li>
+          <% if current_user.user_type == "Owner" %>
+            <li><a href="#">Pets</a></li>
+          <% end %>
           <li><a href="#">Schedule</a></li>
         </ul>
       </li>

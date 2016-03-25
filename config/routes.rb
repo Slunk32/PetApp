@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  resources :reservations
+  devise_for :users, :controllers => { registrations: 'registrations' }
    get 'welcome/index'
 
   resources :personalities, except: [:new, :create]
