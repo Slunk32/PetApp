@@ -70,3 +70,12 @@ a {
   background-color: #FCFCFC;
   text-indent: 10px;
 }
+
+/* changes the size of the user uploaded animal image */
+tbody > tr > td > a > img {
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}

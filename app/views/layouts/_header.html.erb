@@ -25,6 +25,7 @@
           <li><a href="#">Your Profile</a></li>
           <% if current_user.user_type == "Owner" %>
             <li><a href="#">Pets</a></li>
+            <li><a href="/pets/new">New Pet</a></li>
           <% end %>
           <li><a href="#">Schedule</a></li>
         </ul>
