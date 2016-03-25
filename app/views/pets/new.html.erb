@@ -1,8 +1,20 @@
 <h1 id="headingfont">New Pet</h1>
-  <hr>
-  <div class="signup-wrap">
+<hr>
+<div class="signup-wrap">
   <div class="field">
-  <%= render 'form' %>
-  <%= link_to 'Back', pets_path %>
+    <%= render 'form' %>
+    <%= link_to 'Back', pets_path %>
   </div>
 </div>
+</br>
+<% if @pet.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+
+    <ul>
+    <% @pet.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

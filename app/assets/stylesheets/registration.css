@@ -18,6 +18,11 @@ button:focus {
 .field {
   text-align: center;
   font-size: 12pt;
+  color: rgb(82,82,82);
+}
+
+a {
+  color: rgb(82,82,82);
 }
 
 .actions {
@@ -35,7 +40,7 @@ button:focus {
 }
 
 .signup-wrap {
-  width: 300px;
+  max-width: 350px;
   min-height: 350px;
   background-color: rgba(255,255,255,0.7);
   margin: 0 auto;
@@ -44,7 +49,7 @@ button:focus {
   margin-top: 80px;
   border: 3px solid rgb(82,82,82);
 }
-
+/*This section is the styling for our user input form*/
 #user_email {
   border-radius: 25px;
   border: 1px solid rgb(201, 201, 201);
@@ -57,35 +62,6 @@ button:focus {
   border: 1px solid rgb(201, 201, 201);
   background-color: #FCFCFC;
   text-indent: 10px;
-}
-
-#pet_name {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#pet_breed {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#pet_size {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#pet_age {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-  width: 80px;
 }
 
 #user_password_confirmation {

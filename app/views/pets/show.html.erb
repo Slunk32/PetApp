@@ -1,28 +1,32 @@
 <div class="signup-wrap">
-<div class="field">
-<p id="notice"><%= notice %></p>
+  <div class="field">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @pet.name %>
-</p>
+    <h2>
+      <%= @pet.name %>
+    </h2>
+  </br>
+    <p>
+      <strong>Breed:</strong>
+      <%= @pet.breed %>
+    </p>
 
-<p>
-  <strong>Breed:</strong>
-  <%= @pet.breed %>
-</p>
+    <p>
+      <strong>Size:</strong>
+      <%= @pet.size %>
+    </p>
 
-<p>
-  <strong>Size:</strong>
-  <%= @pet.size %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @pet.age %>
-</p>
-
+    <p>
+      <strong>Age:</strong>
+      <%= @pet.age %>
+    </p>
+    <!-- image  -->
+    <p>
+      <%= link_to image_tag(@pet.image.url(:large)), @pet.image.url %>
+    </p>
+  </div>
+  <div class="link-wrap">
+  <%= link_to 'Edit', edit_pet_path(@pet) %> |
+  <%= link_to 'Back', pets_path %>
 </div>
-<%= link_to 'Edit', edit_pet_path(@pet) %> |
-<%= link_to 'Back', pets_path %>
 </div>
