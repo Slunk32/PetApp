@@ -4,7 +4,7 @@
   <table>
     <thead>
       <tr>
-        <th></th>
+        <th><i class="fa fa-paw"></i></th>
         <th><%= sortable "Name"%></th>
         <th><%= sortable "Breed" %></th>
         <th><%= sortable "Size" %></th>
@@ -29,10 +29,10 @@
         <!-- a condition that you must be logged in to edit/destroy-->
         <% if pet.user == current_user %>
         <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
-        <td class="action"><%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="action"><%= link_to 'Remove', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
         <td class="action disabled-links">Edit</td>
-        <td class="action disabled-links">Destroy</td>
+        <td class="action disabled-links">Remove</td>
         <% end %>
       </tr>
       <% end %>

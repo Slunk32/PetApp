@@ -110,6 +110,9 @@ tr:hover td {
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
 }
+ tr:hover td a {
+   color:#FFFFFF;
+ }
 
 tr:first-child {
   border-top:none;

@@ -9,12 +9,23 @@ h1 {
   margin: 0 auto;
 }
 
+.action > a {
+  color: rgb(82,82,82);
+}
+
 p > a > img {
   border: 2px solid rgb(82,82,82);
 }
 
 .link-wrap {
   text-align: center;
+  color: rgb(82,82,82);
+}
+
+thead > tr > th {
+  text-align: center;
+  position: 0 auto;
+  color: rgb(82,82,82);
 }
 /*This section is the styling for our pet input form*/
 #pet_name {
