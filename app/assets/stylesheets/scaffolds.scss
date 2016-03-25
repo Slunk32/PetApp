@@ -43,16 +43,16 @@ div {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
   display: table;
+  margin: 0 auto;
 }
 
 #error_explanation {
+  margin: 0 auto;
   width: 450px;
   border: 2px solid red;
   padding: 7px;
   padding-bottom: 0;
-  margin-bottom: 20px;
   background-color: #f0f0f0;
 
   h2 {

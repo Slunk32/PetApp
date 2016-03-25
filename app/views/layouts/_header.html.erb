@@ -15,12 +15,16 @@
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
         <li class="active"><a href="/pets">View Pets<span class="sr-only">(current)</span></a></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
         <li><a href="#">Contact</a></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
+        <li><a href="#">Contact</a></li>
         <li><%= link_to "Sign up", new_user_registration_path %></li>
         <li><%= link_to "Log in", new_user_session_path %></li>
-        <li><a href="#">Contact</a></li>
         <% end %>
       </ul>
     </div>
