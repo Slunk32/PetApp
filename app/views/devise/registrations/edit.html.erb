@@ -14,7 +14,7 @@
   <!-- This allows to user to edit their status "renter" or "owner-->
   <div class="field">
     <%= f.label :user_type %><br>
-    <% if @user.user_type == "Owner" %>
+    <% if current_user.user_type == "Owner" %>
       <%= f.select :user_type, ['Owner', 'Renter'] %>
     <% else %>
       <%= f.select :user_type, ['Renter', 'Owner'] %>
@@ -38,8 +38,9 @@
   <!-- Submit action -->
   <div class="actions">
     <%= f.submit "Update" %>
-    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   </div>
+
+  <!-- <%# button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %> -->
 
   <% end %>
 </div>

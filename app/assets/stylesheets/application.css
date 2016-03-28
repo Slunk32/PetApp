@@ -17,4 +17,14 @@
 body {
   background-color: #FFC871;
   font-family: 'Source Sans Pro', sans-serif;
+  margin-bottom: 0;
+}
+
+.hjhj {
+  /*margin-top: 100px;*/
+  padding-top: 20px;
+  background-image: url("bottombanner.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
