@@ -27,6 +27,8 @@ gem 'bootstrap-generators'
 
 gem 'geocoder'
 
+gem "simple_calendar", "~> 2.0"
+
 gem 'gmaps4rails'
 
 gem 'paperclip'

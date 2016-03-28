@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :controllers => { registrations: 'registrations' }
+  resources :reservations
    get 'welcome/index'
 
   resources :personalities, except: [:new, :create]
