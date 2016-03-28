@@ -36,6 +36,8 @@ gem 'paperclip'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 
 gem 'omniauth-facebook'
+
+gem 'rubocop', '~> 0.39.0', require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
