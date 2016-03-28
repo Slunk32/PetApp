@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations' }
+
+  resources :users, only: [:show, :edit]
   resources :reservations
    get 'welcome/index'
 
