@@ -18,7 +18,7 @@
     <tbody>
       <% @pets.each do |pet| %>
       <tr>
-        <td><%= link_to image_tag(pet.image.url(:large)), pet.image.url, :class => "animalimg"%></td>
+        <td><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg"%></td>
         <td><%= pet.name %></td>
         <td><%= pet.breed %></td>
         <td><%= pet.size %></td>
