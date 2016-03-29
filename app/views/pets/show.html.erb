@@ -2,7 +2,6 @@
 <div class="signup-wrap">
   <div class="field">
     <p id="notice"><%= notice %></p>
-
     <h2>
       <%= @pet.name %>
     </h2>
@@ -25,8 +24,10 @@
     <p>
       <%= link_to image_tag(@pet.image.url(:large)), @pet.image.url %>
     </p>
+
   </div>
   <div class="link-wrap">
+    <%= link_to 'New Appointment', new_pet_appointment_path(@pet) %>
     <%= link_to 'Edit', edit_pet_path(@pet) %> |
     <%= link_to 'Back', pets_path %>
   </div>
