@@ -1,12 +1,17 @@
 require 'rails_helper'
 
+#, :js => true
+
 RSpec.feature "PetsApis", type: :feature do
   describe "As a user I can" do
 
     #test for logging in
     it "should be able to login successfully" do
+      register
+      click_on 'Logout'
       login
     end
+
     it "should be able to register successfully" do
       register
     end
@@ -30,6 +35,7 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('Collie')
       expect(page).to have_content('Medium')
       expect(page).to have_content('5')
+      expect(page).to have_content('92111')
     end
 
     it 'should allow us to update the dog info' do
@@ -45,31 +51,45 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('German Shephard')
     end
 
-    def login
-        visit 'welcome/index'
-        click_on 'Sign In'
-        fill_in 'user[email]', with: 'vince@gmail.com'
-        fill_in 'user[password]', with: 'password'
-        click_on 'Log in'
+    it 'should not allow you go create a pet without an image' do
+      register
+      create_a_dog
+      expect(page).to have_content("Image can't be blank")
     end
 
+    #---------------methods for testing------------------------
     def register
-      visit 'welcome/index'
+      visit '/welcome/index'
       click_on 'Register'
       fill_in 'user[email]', with: 'vince@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
-      click_on 'Sign up'
+      click_button 'Sign up'
+    end
+
+    def login
+      visit '/welcome/index'
+      #login button on login form is a link? and is has a uppercase 'in'
+      click_on 'Log In'
+      fill_in 'user[email]', with: 'vince@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      #login button on login form is a link? and is has a lowercase 'in'
+      click_link 'Log in'
     end
 
     def create_a_dog
+      find("#navbar_user_name").click
       click_link('New Pet')
       fill_in 'pet[name]', with: 'Bob'
-      find('#pet_breed').find(:xpath, 'option[3]').select_option
+      fill_in 'pet[breed]', with: 'Collie'
       find('#pet_size').find(:xpath, 'option[3]').select_option
       fill_in 'pet[age]', with: '5'
+      fill_in 'pet_zipcode', with: '92111'
       click_on 'Create Pet'
-      expect(page).to have_content('Pet was successfully created')
     end
-  end
-end
+    # -----------------------------------------------------------
+
+
+  end # the end for describe "As a user I can" do
+
+end # the end for RSpec.feature "PetsApis", type: :feature do
