@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :appointments
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations' }
 
   resources :users, only: [:show, :edit]
   resources :reservations
    get 'welcome/index'
 
-  resources :personalities, except: [:new, :create]
+  resources :appointments, except: [:new, :create]
   resources :pets do
-    resources :personalities, only: [:new, :create, :update]
+    resources :appointments, only: [:new, :create, :update]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
