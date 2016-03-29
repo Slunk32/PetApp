@@ -44,10 +44,10 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.6.0.1)
+      railties (>= 3.0)
     bootstrap-generators (3.3.4)
       railties (>= 3.1.0)
-    bootstrap3-datetimepicker-rails (4.17.37)
-      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (8.2.2)
     capybara (2.6.2)
@@ -251,8 +251,8 @@ PLATFORMS
 
 DEPENDENCIES
   area
+  bootstrap-datepicker-rails (~> 1.5)
   bootstrap-generators
-  bootstrap3-datetimepicker-rails (~> 4.17.37)
   byebug
   capybara
   coffee-rails (~> 4.1.0)
