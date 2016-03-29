@@ -31,6 +31,8 @@ gem "simple_calendar", "~> 2.0"
 
 gem 'gmaps4rails'
 
+gem 'area'
+
 gem 'paperclip'
 
 gem 'devise', '~> 3.5', '>= 3.5.6'
