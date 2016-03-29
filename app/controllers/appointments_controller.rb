@@ -17,7 +17,7 @@ class AppointmentsController < ApplicationController
   def new
     @appointment = Appointment.new
     @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user_id = current_user.id
+    @appointment.user = current_user
   end
 
   # GET /appointments/1/edit
@@ -27,9 +27,10 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new(appointment_params)
+    @appointment = Appointment.new#(appointment_params)
+    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
     @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user_id = current_user.id
+    @appointment.user = current_user
 
     respond_to do |format|
       if @appointment.save

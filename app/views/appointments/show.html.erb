@@ -1,18 +1,25 @@
 <h1 id="headingfont">Show appointment</h1>
-
+<hr>
 <div class="signup-wrap">
-  <dl class="dl-horizontal">
-    <dt>Date:</dt>
-    <dd><%= @appointment.date.strftime("%B %d, %Y") %></dd>
+  <div class="field">
+    <p id="notice"><%= notice %></p>
+    <h2>
+      <%= @appointment.pet.name %>
+    </h2>
+  </br>
+    <p>
+      <strong>Date:</strong>
+      <%= @appointment.date.strftime("%B %d, %Y") %>
+    </p>
 
-    <dt>Pet:</dt>
-    <dd><%= @appointment.pet.name %></dd>
+    <p>
+      <strong>User:</strong>
+      <%= @appointment.user.email %>
+    </p>
 
-    <dt>User:</dt>
-    <dd><%= @appointment.user.email %></dd>
-  </dl>
+  </div>
 
   <div class="link-wrap">
-    <%= link_to 'Back', pets_path %>
+    <%= link_to 'Back', @appointment.pet %>
   </div>
 </div>

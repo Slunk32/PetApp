@@ -3,4 +3,5 @@ class Appointment < ActiveRecord::Base
   belongs_to :user
   validates :pet, presence: true
   validates :user, presence: true
+  validates :date, presence: true
 end
