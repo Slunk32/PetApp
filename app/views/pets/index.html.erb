@@ -24,15 +24,14 @@
         <td><%= pet.size %></td>
         <td><%= pet.age %></td>
         <td><%= pet.zipcode %></td>
-        <!-- <td><%# @pet.personality.trait %></td> -->
         <td class="action"><%= link_to 'Show', pet %></td>
         <!-- a condition that you must be logged in to edit/destroy-->
         <% if pet.user == current_user && current_user.user_type == "Owner" %>
-          <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
-          <td class="action"><%= link_to 'Remove', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="action"><%= link_to 'Edit', edit_pet_path(pet) %></td>
+        <td class="action"><%= link_to 'Remove', pet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% elsif current_user.user_type == "Owner" %>
-          <td class="action disabled-links"></td>
-          <td class="action disabled-links"></td>
+        <td class="action disabled-links"></td>
+        <td class="action disabled-links"></td>
         <% elsif current_user.user_type == "Renter"%>
         <% end %>
       </tr>
@@ -40,7 +39,5 @@
     </tbody>
   </table>
   <br>
-    <!-- commented new pet button just in case we want to use it later -->
-    <!-- <%= link_to 'New Pet', new_pet_path, :class => "btn btn-lg btn-default"%> -->
   <p id="notice"><%= notice %></p>
 </div>

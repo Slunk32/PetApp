@@ -10,13 +10,13 @@
 </div>
 </br>
 <% if @pet.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
-
-    <ul>
+<div id="error_explanation">
+  <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+  <!-- This is where our error messages will display -->
+  <ul>
     <% @pet.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <li><%= message %></li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
+</div>
 <% end %>

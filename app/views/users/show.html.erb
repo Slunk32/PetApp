@@ -1,19 +1,20 @@
 <h2 id="headingfont">Your Profile</h2>
-
+<!-- This is our show profile page -->
 <div class="signup-wrap">
   <div class="field">
     <p id="notice"><%= notice %></p>
   </br>
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-    <p>
-      <strong>Type:</strong>
-      <%= @user.user_type %>
-    </p>
+  <p>
+    <strong>Type:</strong>
+    <%= @user.user_type %>
+  </p>
   <div class="link-wrap">
     <%= link_to 'Edit', edit_user_registration_path %>
   </div>
+</div>
 </div>

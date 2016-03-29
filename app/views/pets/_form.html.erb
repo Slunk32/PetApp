@@ -1,39 +1,30 @@
 <%= form_for @pet, html: {multipart: true} do |f| %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :breed %><br>
-    <%= f.text_field :breed %>
-  </div>
-  <div class="field">
-    <%= f.label :size %><br>
-    <%= f.select :size, ['Small', 'Medium', 'Large'], {:include_blank => true} %>
-  </div>
-  <div class="field">
-    <%= f.label :age %><br>
-    <%= f.text_field :age %>
-  </div>
-  <div class="field">
-    <%= f.label :zipcode %><br>
-    <%= f.text_field :zipcode %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </div>
-  <!-- <div class="field">
-    <%= f.label :personality %><br>
-    <%= check_box_tag(:calm) %>
-    <%= label_tag(:calm, "Calm") %>
-    <%= check_box_tag(:energetic) %>
-    <%= label_tag(:energetic, "Energetic") %>
-    <%= check_box_tag(:kid_friendly) %>
-    <%= label_tag(:kid_friendly, "Kid Friendly") %>
-  </div> -->
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :breed %><br>
+  <%= f.text_field :breed %>
+</div>
+<div class="field">
+  <%= f.label :size %><br>
+  <%= f.select :size, ['Small', 'Medium', 'Large'], {:include_blank => true} %>
+</div>
+<div class="field">
+  <%= f.label :age %><br>
+  <%= f.text_field :age %>
+</div>
+<div class="field">
+  <%= f.label :zipcode %><br>
+  <%= f.text_field :zipcode %>
+</div>
+<div class="field">
+  <%= f.label :image %><br>
+  <%= f.file_field :image %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
