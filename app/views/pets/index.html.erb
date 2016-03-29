@@ -26,12 +26,12 @@
         <!-- a condition that you must be logged in to edit/destroy-->
         <% if pet.user == current_user && current_user.user_type == "Owner" %>
         <td class="action">
-          <%= link_to edit_pet_path(pet) do %>
+          <%= link_to edit_pet_path(pet), id: 'edit_link' do %>
             <i class="fa fa-pencil"></i>
           <% end %>
         </td>
-        <td class="action">
-          <%= link_to pet, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <td class="action" id="trash">
+          <%= link_to pet, id: 'delete_link', method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class="fa fa-trash"></i>
           <% end %>
         </td>
