@@ -1,5 +1,6 @@
 class Pet < ActiveRecord::Base
   has_many :personalities
+  has_many :appointments
   belongs_to :user
   has_attached_file :image, styles: { small: "80x80", med: "100x100", large: "200x200" }
   validates_attachment :image, presence: true,
