@@ -23,12 +23,12 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('Dog Listing')
     end
 
-    it 'will allow an owner to create a dog' do
+    it 'should be able to create a dog' do
       owner_register
       create_a_dog
     end
 
-    it 'will display the new pet in the listing' do
+    it 'should see the new pet in the listing' do
       owner_register
       create_a_dog
       click_on 'Back'
@@ -39,7 +39,7 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('92111')
     end
 
-    it 'should allow us to update the dog info' do
+    it 'should be able to update the dog info' do
       owner_register
       create_a_dog
       click_on 'Back'
@@ -53,7 +53,7 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
-    skip 'should allow us to delete the dog info' do
+    skip 'should be able to delete the dog info' do
       owner_register
       create_a_dog
       click_on 'Back'
@@ -69,7 +69,7 @@ RSpec.feature "PetsApis", type: :feature do
     end
     #--------------------------Pending------------------------------------------
 
-    it 'should not allow you to create a pet without an image' do
+    it 'should not not be able to create a pet without an image' do
       owner_register
       find("#navbar_user_name").click
       click_link('New Pet')
@@ -80,10 +80,6 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'pet_zipcode', with: '92111'
       click_on 'Create Pet'
       expect(page).to have_content("Image can't be blank")
-    end
-
-    it 'should schedule a pet appointment' do
-
     end
 
     # Rebecca's code to upload a new user and and image with paperclip
@@ -109,6 +105,16 @@ RSpec.feature "PetsApis", type: :feature do
       click_button 'Sign up'
     end
 
+    def login
+      visit '/welcome/index'
+      #login button on login form is a link? and is has a uppercase 'in'
+      click_on 'Log In'
+      fill_in 'user[email]', with: 'vince@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      #login button on login form is a link? and is has a lowercase 'in'
+      click_link 'Log in'
+    end
+
     def create_a_dog
       find("#navbar_user_name").click
       click_link('New Pet')
@@ -128,16 +134,62 @@ RSpec.feature "PetsApis", type: :feature do
   describe "As a user I" do
 
     it "should be able to register successfully for an owner" do
+      visit '/welcome/index'
       renter_register
     end
 
+    it 'should schedule a pet appointment' do
+      owner_register
+      create_a_dog
+      find('#Logout').click
+      renter_register
+      page.find("#show_link").click
+      click_link 'New Appointment'
+      fill_in 'appointment[date]', with: '03/30/2016'
+      expect(page).to have_content('Bob')
+      expect(page).to have_content('andrew@gmail.com')
+      click_on 'Create Appointment'
+      expect(page).to have_content("Appointment was successfully created.")
+      expect(page).to have_content('March 30, 2016')
+    end
+
+    it 'should show all appointments' do
+      owner_register
+      create_a_dog
+      find('#Logout').click
+      renter_register
+      page.find("#show_link").click
+      click_link 'New Appointment'
+      fill_in 'appointment[date]', with: '03/30/2016'
+      expect(page).to have_content('Bob')
+      expect(page).to have_content('andrew@gmail.com')
+      click_on 'Create Appointment'
+      expect(page).to have_content("Appointment was successfully created.")
+      visit '/appointments'
+      expect(page).to have_content("Listing appointments")
+      expect(page).to have_content('Bob')
+      expect(page).to have_content('andrew@gmail.com')
+      expect(page).to have_content('March 30, 2016')
+    end
+
+    # methods
+
     def renter_register
+      click_on 'Register'
+      fill_in 'user[email]', with: 'andrew@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Renter", :from => "user[user_type]"
+      click_button 'Sign up'
+    end
+
+    def owner_register
       visit '/welcome/index'
       click_on 'Register'
       fill_in 'user[email]', with: 'vince@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
-      select "Renter", :from => "user[user_type]"
+      select "Owner", :from => "user[user_type]"
       click_button 'Sign up'
     end
 
@@ -149,6 +201,18 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'user[password]', with: 'password'
       #login button on login form is a link? and is has a lowercase 'in'
       click_link 'Log in'
+    end
+
+    def create_a_dog
+      find("#navbar_user_name").click
+      click_link('New Pet')
+      fill_in 'pet[name]', with: 'Bob'
+      fill_in 'pet[breed]', with: 'Collie'
+      find('#pet_size').find(:xpath, 'option[3]').select_option
+      fill_in 'pet[age]', with: '5'
+      fill_in 'pet_zipcode', with: '92111'
+      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+      click_on 'Create Pet'
     end
   end
 

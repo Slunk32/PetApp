@@ -24,16 +24,17 @@
         <ul class="dropdown-menu">
           <% if current_user.user_type == "Owner" %>
             <li><%= link_to "Your Profile (Owner)", user_path(current_user.id) %></li>
-            <li><a href="#">Pets</a></li>
+            <li><a href="/pets">Pets</a></li>
             <li><a href="/pets/new">New Pet</a></li>
           <% else %>
             <li><%= link_to "Your Profile (Renter)", user_path(current_user.id) %></li>
+            <li><a href="/appointments">Your Appointments</a></li>
           <% end %>
           <li><a href="#">Schedule</a></li>
         </ul>
       </li>
           <li><a href="#">Contact</a></li>
-          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+          <li><%= link_to('Logout', destroy_user_session_path, :id => 'Logout', :method => :delete) %></li>
         <% else %>
           <li><a href="#">Contact</a></li>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
