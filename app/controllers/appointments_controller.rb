@@ -1,16 +1,23 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  # before_action :check_user_access
 
 
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.where(user: current_user)
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
+    #@appointment = Appointment.find(params[:id])
+    if @appointment.pet.user == current_user || @appointment.user == current_user
+      # good
+    else
+      # do not grant access
+    end
   end
 
   # GET /appointments/new
