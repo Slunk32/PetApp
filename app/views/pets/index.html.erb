@@ -4,12 +4,12 @@
   <table>
     <thead>
       <tr class="listingrow">
-        <th class="listingheader"><i class="fa fa-paw"></i></th>
-        <th class="listingheader"><%= sortable "Name"%></th>
-        <th class="listingheader"><%= sortable "Breed" %></th>
-        <th class="listingheader"><%= sortable "Size" %></th>
-        <th class="listingheader"><%= sortable "Age" %></th>
-        <th class="listingheader"><%= sortable "Zipcode" %></th>
+        <th class="listingheader"><%= "POOCH" %></th>
+        <th class="listingheader"><%= sortable "name", "Name" %></th>
+        <th class="listingheader"><%= sortable "breed", "Breed" %></th>
+        <th class="listingheader"><%= sortable "size", "Size" %></th>
+        <th class="listingheader"><%= sortable "age", "Age" %></th>
+        <th class="listingheader"><%= sortable "zipcode", "Zipcode" %></th>
         <% if current_user.user_type == "Owner" %>
           <th class="listingheader" colspan="2">Edit</th>
         <% end %>
