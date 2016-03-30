@@ -4,4 +4,5 @@ class Appointment < ActiveRecord::Base
   validates :pet, presence: true
   validates :user, presence: true
   validates :date, presence: true
+  validates_uniqueness_of :date, scope: :pet_id, :message => "already exists"
 end
