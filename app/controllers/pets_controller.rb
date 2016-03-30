@@ -15,7 +15,7 @@ class PetsController < ApplicationController
   # GET /pets.json
   def index
       @pets = Pet.order(sort_column + " " + sort_direction)
-      
+
     end
     def sort_column
        Pet.column_names.include?(params[:sort]) ? params[:sort] : "name"

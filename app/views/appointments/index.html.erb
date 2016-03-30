@@ -1,32 +1,27 @@
-<div class="page-header">
-  <%= link_to new_appointment_path, class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New Appointment
-  <% end %>
-  <h1>Listing appointments</h1>
-</div>
+<h1 id="headingfont">Listing Appointments</h1>
 
-<div class="table-responsive">
+<div class="table-responsive listingappt">
   <table class="table table-striped table-bordered table-hover">
-    <thead>
+    <thead class="apptheader">
       <tr>
             <th>Date</th>
             <th>Pet</th>
             <th>User</th>
-            <th></th>
-        <th></th>
-        <th></th>
+            <th colspan="2"></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @appointments) do |appointment| %>
-            <td><%= appointment.date %></td>
-            <td><%= appointment.pet.name %></td>
-            <td><%= appointment.user.email %></td>
-            <td><%= link_to 'Show', appointment %></td>
-        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
-        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to appointment.date.strftime("%B %d, %Y"), appointment  %></td>
+            <td><%= link_to appointment.pet.name, appointment.pet %></td>
+            <td><%= link_to appointment.user.email, appointment.user %></td>
+        <td><%= link_to edit_appointment_path(appointment) do %>
+          <i class="fa fa-pencil"></i>
+          <% end %></td>
+        <td><%= link_to appointment, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="fa fa-trash"></i>
+        <% end %></td>
       <% end %>
     </tbody>
   </table>
