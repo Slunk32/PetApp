@@ -26,7 +26,7 @@
         <!-- a condition that you must be logged in to edit/destroy-->
         <% if pet.user == current_user && current_user.user_type == "Owner" %>
         <td class="action listingcell">
-          <%= link_to edit_pet_path(pet) do %>
+          <%= link_to edit_pet_path(pet), :id => 'edit_link' do %>
             <i class="fa fa-pencil"></i>
           <% end %>
         </td>
