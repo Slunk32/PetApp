@@ -3,41 +3,41 @@
 <div class="petlisting">
   <table>
     <thead>
-      <tr>
-        <th><i class="fa fa-paw"></i></th>
-        <th><%= sortable "Name"%></th>
-        <th><%= sortable "Breed" %></th>
-        <th><%= sortable "Size" %></th>
-        <th><%= sortable "Age" %></th>
-        <th><%= sortable "Zipcode" %></th>
-        <th colspan="3">Edit</th>
+      <tr class="listingrow">
+        <th class="listingheader"><i class="fa fa-paw"></i></th>
+        <th class="listingheader"><%= sortable "Name"%></th>
+        <th class="listingheader"><%= sortable "Breed" %></th>
+        <th class="listingheader"><%= sortable "Size" %></th>
+        <th class="listingheader"><%= sortable "Age" %></th>
+        <th class="listingheader"><%= sortable "Zipcode" %></th>
+        <th class="listingheader" colspan="3">Edit</th>
       </tr>
     </thead>
 
     <tbody>
       <% @pets.each do |pet| %>
-      <tr>
-        <td><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg"%></td>
-        <td><%= pet.name %></td>
-        <td><%= pet.breed %></td>
-        <td><%= pet.size %></td>
-        <td><%= pet.age %></td>
-        <td><%= pet.zipcode %></td>
+      <tr class="listingrow">
+        <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive"%></td>
+        <td class="listingcell"><%= pet.name %></td>
+        <td class="listingcell"><%= pet.breed %></td>
+        <td class="listingcell"><%= pet.size %></td>
+        <td class="listingcell"><%= pet.age %></td>
+        <td class="listingcell"><%= pet.zipcode %></td>
         <!-- a condition that you must be logged in to edit/destroy-->
         <% if pet.user == current_user && current_user.user_type == "Owner" %>
-        <td class="action">
-          <%= link_to edit_pet_path(pet), id: 'edit_link' do %>
+        <td class="action listingcell">
+          <%= link_to edit_pet_path(pet), :id => 'edit_link' do %>
             <i class="fa fa-pencil"></i>
           <% end %>
         </td>
-        <td class="action" id="trash">
-          <%= link_to pet, id: 'delete_link', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <td class="action listingcell">
+          <%= link_to pet, method: :delete, data: { confirm: 'Are you sure?' } do %>
             <i class="fa fa-trash"></i>
           <% end %>
         </td>
         <% elsif current_user.user_type == "Owner" %>
-        <td class="action disabled-links"></td>
-        <td class="action disabled-links"></td>
+        <td class="action disabled-links listingcell"></td>
+        <td class="action disabled-links listingcell"></td>
         <% elsif current_user.user_type == "Renter"%>
         <% end %>
       </tr>

@@ -23,6 +23,10 @@ li a:hover {
   font-size: 15pt;
 }
 
+.animalimg {
+
+}
+
 // .notice {
 //   margin-top: 80%;
 // }
@@ -73,7 +77,7 @@ h1 {
   animation: float 5s infinite;
 }
 
-th {
+.listingheader {
   color: black;
   background:#FFFFFF;
   border-bottom:4px solid #343a45;
@@ -86,16 +90,16 @@ th {
   vertical-align:middle;
 }
 
-th:first-child {
+.listingheader:first-child {
   border-top-left-radius:3px;
 }
 
-th:last-child {
+.listingheader:last-child {
   border-top-right-radius:3px;
   border-right:none;
 }
 
-tr {
+.listingrow {
   border-top: 1px solid #C1C3D1;
   border-bottom: 1px solid #C1C3D1;
   color:#666B85;
@@ -104,29 +108,29 @@ tr {
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
-tr:hover td {
+.listingrow:hover .listingcell {
   background:#0B4FA0;
   color:#FFFFFF;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
 }
- tr:hover td a {
+ .listingrow:hover .listingcell a {
    color:#FFFFFF;
  }
 
-tr:first-child {
+.listingrow:first-child {
   border-top:none;
 }
 
-tr:last-child {
+.listingrow:last-child {
   border-bottom:none;
 }
 
-tr:nth-child(odd) td {
+.listingrow:nth-child(odd) .listingcell {
   background:#91DDFE;
 }
 
-tr:nth-child(odd):hover td {
+.listingrow:nth-child(odd):hover .listingcell {
   background:#0B4FA0;
 }
 
@@ -134,15 +138,15 @@ tr:nth-child(odd):hover td {
   color: white;
 }
 
-tr:last-child td:first-child {
+.listingrow:last-child .listingcell:first-child {
   border-bottom-left-radius:3px;
 }
 
-tr:last-child td:last-child {
+.listingrow:last-child .listingcell:last-child {
   border-bottom-right-radius:3px;
 }
 
-td {
+.listingcell {
   background:#FFFFFF;
   padding:20px;
   text-align:left;
@@ -153,30 +157,30 @@ td {
   border-right: 1px solid #C1C3D1;
 }
 
-td:last-child {
+.listingcell:last-child {
   border-right: 0px;
 }
 
-th.text-left {
+.listingcell.text-left {
   text-align: left;
 }
 
-th.text-center {
+.listingcell.text-center {
   text-align: center;
 }
 
-th.text-right {
+.listingcell.text-right {
   text-align: right;
 }
 
-td.text-left {
+.listingcell.text-left {
   text-align: left;
 }
 
-td.text-center {
+.listingcell.text-center {
   text-align: center;
 }
 
-td.text-right {
+.listingcell.text-right {
   text-align: right;
 }

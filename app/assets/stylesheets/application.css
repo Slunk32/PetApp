@@ -30,3 +30,14 @@ body {
   background-position: bottom;
   border-bottom: 30px solid gray;
 }
+
+.btn-primary {
+  background-color: green;
+  border-radius: 25px;
+  font-size: 10pt;
+}
+
+.btn-primary:hover {
+  color: white;
+  background-color: green;
+}
