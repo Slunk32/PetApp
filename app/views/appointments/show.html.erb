@@ -17,10 +17,18 @@
       <%= @appointment.user.email %>
     </p>
 
-    <p>
-      <strong>Dog Owner Emergency Contact:</strong>
-      <%= @appointment.pet.user.phone_number %>
-    </p>
+    <% if current_user.user_type == "Renter" %>
+      <p>
+        <strong>Dog Owner Emergency Contact:</strong>
+        <%= @appointment.pet.user.phone_number %>
+      </p>
+    <% else %>
+      <p>
+        <strong>Dog Renter Emergency Contact:</strong>
+        <%= @appointment.user.phone_number %>
+      </p>
+    <% end %>
+
   </div>
 
   <div class="link-wrap">
