@@ -47,10 +47,9 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
   <!-- Submit action -->
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <div class="field">
+    <%= f.submit "Update", :class => "btn edit_btn" %>
   </div>
-
   <!-- <%# button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %> -->
 
   <% end %>

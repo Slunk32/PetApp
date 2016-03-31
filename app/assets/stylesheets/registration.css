@@ -88,6 +88,10 @@ a {
   text-indent: 10px;
 }
 
+#user_avatar {
+  
+}
+
 /* changes the size of the user uploaded animal image */
 tbody > tr > td > a > img {
   border: 2px solid black;

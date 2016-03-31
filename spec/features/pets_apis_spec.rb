@@ -470,6 +470,7 @@ RSpec.feature "PetsApis", type: :feature do
       attach_file('user_avatar', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
       fill_in 'user[current_password]', with: 'password'
       click_button 'Update'
+      expect(page).to have_content('Your account has been updated successfully.')
     end
 
     def renter_register
