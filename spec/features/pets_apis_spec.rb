@@ -52,6 +52,39 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('German Shephard')
     end
 
+    it 'should only see the Owners dog that they made (as an owner)' do
+      owner_register
+      create_a_dog
+      find('#Logout').click
+      visit '/welcome/index'
+      click_on 'Register'
+      fill_in 'user[email]', with: 'russ@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Owner", :from => "user[user_type]"
+      click_button 'Sign up'
+      expect(page).to_not have_content('Bob')
+      expect(page).to_not have_content('Collie')
+      expect(page).to_not have_content('Large')
+      expect(page).to_not have_content('5')
+      expect(page).to_not have_content('92111')
+      find("#navbar_user_name").click
+      click_link('New Pet')
+      fill_in 'pet[name]', with: 'Gina'
+      fill_in 'pet[breed]', with: 'Golden Retriever'
+      find('#pet_size').find(:xpath, 'option[2]').select_option
+      fill_in 'pet[age]', with: '2'
+      fill_in 'pet_zipcode', with: '92117'
+      attach_file('paperclip_upload', '/Users/learn/Desktop/PetApp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+      click_on 'Create Pet'
+      click_on 'Back'
+      expect(page).to have_content('Gina')
+      expect(page).to have_content('Golden retriever')
+      expect(page).to have_content('Small')
+      expect(page).to have_content('2')
+      expect(page).to have_content('92117')
+    end
+
     # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
     skip 'should be able to delete the dog info' do
       owner_register
@@ -141,35 +174,59 @@ RSpec.feature "PetsApis", type: :feature do
     it 'should schedule a pet appointment' do
       owner_register
       create_a_dog
-      find('#Logout').click
+      logout
       renter_register
-      page.find("#show_link").click
-      click_link 'New Appointment'
-      fill_in 'appointment[date]', with: '03/30/2016'
-      expect(page).to have_content('Bob')
-      expect(page).to have_content('andrew@gmail.com')
-      click_on 'Create Appointment'
-      expect(page).to have_content("Appointment was successfully created.")
-      expect(page).to have_content('March 30, 2016')
+      create_an_appointment
     end
 
     it 'should show all appointments' do
       owner_register
       create_a_dog
-      find('#Logout').click
+      logout
       renter_register
-      page.find("#show_link").click
+      create_an_appointment
+    end
+
+
+
+    it 'should only allow dogs to be book with a specific time once' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      click_on 'Back'
       click_link 'New Appointment'
+      expect(page).to have_content('Date')
       fill_in 'appointment[date]', with: '03/30/2016'
       expect(page).to have_content('Bob')
       expect(page).to have_content('andrew@gmail.com')
       click_on 'Create Appointment'
-      expect(page).to have_content("Appointment was successfully created.")
-      visit '/appointments'
-      expect(page).to have_content("Listing appointments")
+      expect(page).to have_content("Date already exists")
+    end
+
+    it 'should only allow one renter to book a specific dog at a spcific date' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      logout
+      click_on 'Register'
+      fill_in 'user[email]', with: 'russ@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Renter", :from => "user[user_type]"
+      click_button 'Sign up'
+      page.find("#show_link").click
+      expect(page).to have_content('New Appointment')
       expect(page).to have_content('Bob')
-      expect(page).to have_content('andrew@gmail.com')
-      expect(page).to have_content('March 30, 2016')
+      expect(page).to have_content('russ@gmail.com')
+      click_link 'New Appointment'
+      expect(page).to have_content('Date')
+      fill_in 'appointment[date]', with: '03/30/2016'
+      click_on 'Create Appointment'
+      expect(page).to have_content("Date already exists")
     end
 
     # methods
@@ -213,7 +270,28 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'pet_zipcode', with: '92111'
       attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
       click_on 'Create Pet'
+      click_on 'Back'
     end
+
+    def create_an_appointment
+      page.find("#show_link").click
+      expect(page).to have_content('New Appointment')
+      expect(page).to have_content('Bob')
+      expect(page).to have_content('andrew@gmail.com')
+      click_link 'New Appointment'
+      expect(page).to have_content('Date')
+      fill_in 'appointment[date]', with: '03/30/2016'
+      expect(page).to have_content('Bob')
+      expect(page).to have_content('andrew@gmail.com')
+      click_on 'Create Appointment'
+      expect(page).to have_content("Appointment was successfully created.")
+      expect(page).to have_content('March 30, 2016')
+    end
+
+    def logout
+      find('#Logout').click
+    end
+
   end
 
 
