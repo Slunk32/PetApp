@@ -19,8 +19,14 @@
 body {
   background-color: #FFC871;
   font-family: 'Source Sans Pro', sans-serif;
-  margin-bottom: 0;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 /*The styling for our bottom banner*/
 .hjhj {
   padding-top: 20px;
@@ -28,7 +34,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
-  border-bottom: 30px solid gray;
+  border-bottom: 20px solid gray;
 }
 
 .btn-primary {
@@ -40,4 +46,12 @@ body {
 .btn-primary:hover {
   color: white;
   background-color: green;
+}
+
+#navbar_user_name {
+  padding: 9px;
+}
+
+#navbar_user_name img {
+  border: 1px solid rgb(200, 200, 200);
 }

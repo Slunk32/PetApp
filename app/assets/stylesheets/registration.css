@@ -39,6 +39,22 @@ a {
   border: 1px solid rgb(201, 201, 201);
 }
 
+.edit_btn {
+  margin: 0 auto;
+  text-align: center;
+  width: 100px;
+  color: white;
+  background-color: green;
+  border-radius: 25px;
+  font-size: 12pt;
+  margin-top: 15%;
+  border: 1px solid rgb(201, 201, 201);
+}
+
+.edit_btn > a {
+  color: white;
+}
+
 .signup-wrap {
   max-width: 350px;
   min-height: 350px;
