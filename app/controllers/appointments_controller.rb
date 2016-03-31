@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  # before_action :check_user_access
 
 
   # GET /appointments
@@ -11,12 +12,6 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-  #  #@appointment = Appointment.find(params[:id])
-  #  if @appointment.pet.user == current_user || @appointment.user == current_user
-   #
-  #  else
-  #    redirect_to '/welcome/index'
-  #  end
  end
 
   # GET /appointments/new
@@ -42,15 +37,13 @@ class AppointmentsController < ApplicationController
       @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
       @appointment.pet = Pet.find(params[:pet_id])
       @appointment.user = current_user
-
-      respond_to do |format|
+    respond_to do |format|
         if @appointment.save
-          format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-          format.json { render :show, status: :created, location: @appointment }
-        else
-          format.html { render :new }
-          format.json { render json: @appointment.errors, status: :unprocessable_entity }
-        end
+        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+        format.json { render :show, status: :created, location: @appointment }
+      else
+        format.html { render :new, notice: 'WRONG!' }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity}
       end
     else
       redirect_to '/'

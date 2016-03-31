@@ -18,8 +18,7 @@
 
     <tbody>
       <% if current_user.user_type == "Owner" %>
-        <% @pets = current_user.pets %>
-        <% @pets.each do |pet| %>
+        <% @current_user.pets.each do |pet| %>
           <tr class="listingrow">
             <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>
             <td class="listingcell"><%= pet.name %></td>

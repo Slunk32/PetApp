@@ -15,7 +15,7 @@
   <div class="form-group">
     <%= f.label :date, class: "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :date, 'data-behaviour' => 'datepicker' %>
+      <%= f.text_field :date, 'data-behaviour' => 'datepicker', :id => 'app_calendar', :required => true %>
       <script type="text/javascript">
       $(document).ready(function(){
         $('[data-behaviour~=datepicker]').datepicker();
