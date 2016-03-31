@@ -3,15 +3,18 @@
 <div class="signup-wrap">
   <div class="field">
     <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Type:</strong>
+    <%= @user.user_type %>
   </br>
+  </p>
+
   <p>
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
-
   <p>
-    <strong>Type:</strong>
-    <%= @user.user_type %>
+    <%= image_tag(current_user.avatar.url(:medium)) %>
   </p>
 
   <p>
@@ -20,6 +23,9 @@
   </p>
 
   <div class="link-wrap">
+
+  <div class="edit_btn">
+
     <%= link_to 'Edit', edit_user_registration_path %>
   </div>
 </div>
