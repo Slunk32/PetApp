@@ -27,9 +27,19 @@ li a:hover {
 
 }
 
-// .notice {
-//   margin-top: 80%;
-// }
+thead tr th .current {
+  padding-right: 30px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+thead tr th .asc {
+  background-image: url('dog.png');
+}
+
+thead tr th .desc {
+  background-image: url('dogdown.png');
+}
 
 table {
   width: 80%;
