@@ -6,7 +6,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.where(user: current_user)
+    @appointments = current_user.appointments
   end
 
   # GET /appointments/1
@@ -16,9 +16,13 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
-    @appointment = Appointment.new
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
+    else
+      redirect_to '/'
+    end
   end
 
   # GET /appointments/1/edit
@@ -28,12 +32,11 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new#(appointment_params)
-    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
-
-
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new#(appointment_params)
+      @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
     respond_to do |format|
         if @appointment.save
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
@@ -42,6 +45,8 @@ class AppointmentsController < ApplicationController
         format.html { render :new, notice: 'WRONG!' }
         format.json { render json: @appointment.errors, status: :unprocessable_entity}
       end
+    else
+      redirect_to '/'
     end
   end
 
