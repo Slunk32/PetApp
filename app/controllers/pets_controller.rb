@@ -36,7 +36,8 @@ class PetsController < ApplicationController
 
   # GET /pets/1/edit
   def edit
-    if current_user.user_type == "Renter"
+    if current_user.user_type == "Owner" && @pet.user == current_user
+    else
       redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
@@ -66,7 +67,7 @@ class PetsController < ApplicationController
   # PATCH/PUT /pets/1
   # PATCH/PUT /pets/1.json
   def update
-    if current_user.user_type == "Owner"
+    if current_user.user_type == "Owner" && @pet.user == current_user
       respond_to do |format|
         if @pet.update(pet_params)
           format.html { redirect_to @pet, notice: 'Pet was successfully updated.' }
@@ -84,7 +85,7 @@ class PetsController < ApplicationController
   # DELETE /pets/1
   # DELETE /pets/1.json
   def destroy
-    if current_user.user_type == "Owner"
+    if current_user.user_type == "Owner" && @pet.user == current_user
       @pet.personalities.destroy_all
       @pet.destroy
       respond_to do |format|

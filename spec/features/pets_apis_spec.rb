@@ -4,6 +4,7 @@ require 'rails_helper'
 #, :js => true
 
 RSpec.feature "PetsApis", type: :feature do
+
   describe "As an owner I" do
 
     #test for logging in
@@ -115,6 +116,24 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content("Image can't be blank")
     end
 
+    it 'should not be able to edit a pet they did not create' do
+      owner_register
+      create_a_dog
+      find('#Logout').click
+      owner_register_2
+      visit '/pets/' + Pet.last.id.to_s + '/edit'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content('You do not have access to this page.')
+    end
+
+    it "should not be able to schedule an appointment" do
+      owner_register
+      create_a_dog
+      visit '/pets/' + Pet.last.id.to_s + '/appointments/new'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content('You do not have access to this page.')
+    end
+
     # Rebecca's code to upload a new user and and image with paperclip
     # it "will allow a user to enter an email address, password, password confirm, upload an avatar and register" do
     #   visit "/users/sign_up"
@@ -132,6 +151,16 @@ RSpec.feature "PetsApis", type: :feature do
       visit '/welcome/index'
       click_on 'Register'
       fill_in 'user[email]', with: 'vince@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Owner", :from => "user[user_type]"
+      click_button 'Sign up'
+    end
+
+    def owner_register_2
+      visit '/welcome/index'
+      click_on 'Register'
+      fill_in 'user[email]', with: 'yosef@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       select "Owner", :from => "user[user_type]"
@@ -159,12 +188,15 @@ RSpec.feature "PetsApis", type: :feature do
       attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
       click_on 'Create Pet'
     end
-    # -----------------------------------------------------------
-
-
   end # the end for describe "As an owner I can" do
 
-  describe "As a user I" do
+#_______________________________________________________________________________
+#_______________________________________________________________________________
+
+
+
+
+  describe "As a renter I" do
 
     it "should be able to register successfully for an owner" do
       visit '/welcome/index'
@@ -186,8 +218,6 @@ RSpec.feature "PetsApis", type: :feature do
       renter_register
       create_an_appointment
     end
-
-
 
     it 'should only allow dogs to be book with a specific time once' do
       owner_register
@@ -297,13 +327,57 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page.find('#zipcodeheader a')[:class]).to eq('current desc')
     end
 
+    it 'cannot create a pet' do
+      renter_register
+      visit '/pets/new'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content('You do not have access to this page.')
+    end
 
+    it 'cannot edit a pet' do
+      owner_register
+      create_a_dog
+      find('#Logout').click
+      renter_register
+      visit '/pets/' + Pet.last.id.to_s + '/edit'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content('You do not have access to this page.')
+    end
+
+    it 'should not be able to edit another renters appointment' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      logout
+      renter_register_2
+      visit '/appointments/' + Appointment.last.id.to_s + '/edit'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content('You do not have access to this page.')
+    end
+
+
+
+#_______________________________________________________________________________
+#_______________________________________________________________________________
 
     # methods
 
     def renter_register
+      visit '/welcome/index'
       click_on 'Register'
       fill_in 'user[email]', with: 'andrew@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Renter", :from => "user[user_type]"
+      click_button 'Sign up'
+    end
+
+    def renter_register_2
+      visit '/welcome/index'
+      click_on 'Register'
+      fill_in 'user[email]', with: 'shmuck@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       select "Renter", :from => "user[user_type]"
