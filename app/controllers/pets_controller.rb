@@ -14,16 +14,12 @@ class PetsController < ApplicationController
   # GET /pets
   # GET /pets.json
   def index
-      @pets = Pet.order(sort_column + " " + sort_direction)
+    @pets = Pet.order(sort_column + " " + sort_direction)
+  end
 
-    end
-    def sort_column
-       Pet.column_names.include?(params[:sort]) ? params[:sort] : "name"
-     end
-
-     def sort_direction
-       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-     end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
   # GET /pets/1
   # GET /pets/1.json
   def show
@@ -90,5 +86,13 @@ class PetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pet_params
       params.require(:pet).permit(:name, :breed, :size, :age, :zipcode, :image)
+    end
+
+    def sort_column
+      Pet.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

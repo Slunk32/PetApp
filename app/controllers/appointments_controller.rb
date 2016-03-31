@@ -12,13 +12,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-    #@appointment = Appointment.find(params[:id])
-    if @appointment.pet.user == current_user || @appointment.user == current_user
-      # good
-    else
-      # do not grant access
-    end
-  end
+ end
 
   # GET /appointments/new
   def new
