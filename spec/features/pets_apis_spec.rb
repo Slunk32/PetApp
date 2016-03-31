@@ -461,6 +461,27 @@ RSpec.feature "PetsApis", type: :feature do
     end
   end
 
+  describe "As a User I" do
+    it "can update my profile with an avatar" do
+      renter_register
+      find("#navbar_user_name").click
+      click_link('Your Profile (Renter)')
+      click_link('Edit')
+      attach_file('user_avatar', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+      fill_in 'user[current_password]', with: 'password'
+      click_button 'Update'
+    end
+
+    def renter_register
+      visit '/welcome/index'
+      click_on 'Register'
+      fill_in 'user[email]', with: 'andrew@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      select "Renter", :from => "user[user_type]"
+      click_button 'Sign up'
+    end
+  end
 
 
 end # the end for RSpec.feature "PetsApis", type: :feature do

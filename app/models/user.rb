@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :pets
   has_many :appointments
 
-  has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "32x32#" }, :default_url => "/images/:style/homer.jpg"
+  has_attached_file :avatar, :styles => { :medium => "150x150", :thumb => "32x32" }, :default_url => "/images/:style/homer.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   # Omniauth allows our app to extract information from other API's
