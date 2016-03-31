@@ -227,12 +227,6 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'appointment[date]', with: '03/30/2016'
       click_on 'Create Appointment'
       expect(page).to have_content("Date already exists")
-      expect(page).to have_content("Appointment was successfully created.")
-      visit '/appointments'
-      expect(page).to have_content("Listing Appointments")
-      expect(page).to have_content('Bob')
-      expect(page).to have_content('andrew@gmail.com')
-      expect(page).to have_content('March 30, 2016')
     end
 
     it 'can sort the pet list name column by asc/desc' do
