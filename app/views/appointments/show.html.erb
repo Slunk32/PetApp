@@ -16,6 +16,11 @@
       <strong>User:</strong>
       <%= @appointment.user.email %>
     </p>
+
+    <p>
+      <strong>Dog Owner Emergency Contact:</strong>
+      <%= @appointment.pet.user.phone_number %>
+    </p>
   </div>
 
   <div class="link-wrap">

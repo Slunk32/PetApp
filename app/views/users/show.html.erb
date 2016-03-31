@@ -13,6 +13,12 @@
     <strong>Type:</strong>
     <%= @user.user_type %>
   </p>
+
+  <p>
+    <strong>Emergency Contact:</strong>
+    <%= @user.phone_number %>
+  </p>
+
   <div class="link-wrap">
     <%= link_to 'Edit', edit_user_registration_path %>
   </div>
