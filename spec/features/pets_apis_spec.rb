@@ -166,11 +166,81 @@ RSpec.feature "PetsApis", type: :feature do
       click_on 'Create Appointment'
       expect(page).to have_content("Appointment was successfully created.")
       visit '/appointments'
-      expect(page).to have_content("Listing appointments")
+      expect(page).to have_content("Listing Appointments")
       expect(page).to have_content('Bob')
       expect(page).to have_content('andrew@gmail.com')
       expect(page).to have_content('March 30, 2016')
     end
+
+    it 'can sort the pet list name column by asc/desc' do
+      owner_register
+      create_a_dog
+      create_a_dog_2
+      create_a_dog_3
+      find('#Logout').click
+      renter_register
+      expect(page.find('#nameheader a')[:class]).to eq('current asc')
+      find('#nameheader a').click
+      expect(page.find('#nameheader a')[:class]).to eq('current desc')
+    end
+
+    it 'can sort the pet list breed column by asc/desc' do
+      owner_register
+      create_a_dog
+      create_a_dog_2
+      create_a_dog_3
+      find('#Logout').click
+      renter_register
+      expect(page.find('#nameheader a')[:class]).to eq('current asc')
+      find('#breedheader a').click
+      expect(page.find('#breedheader a')[:class]).to eq('current asc')
+      find('#breedheader a').click
+      expect(page.find('#breedheader a')[:class]).to eq('current desc')
+    end
+
+    it 'can sort the pet list size column by asc/desc' do
+      owner_register
+      create_a_dog
+      create_a_dog_2
+      create_a_dog_3
+      find('#Logout').click
+      renter_register
+      expect(page.find('#nameheader a')[:class]).to eq('current asc')
+      find('#sizeheader a').click
+      expect(page.find('#sizeheader a')[:class]).to eq('current asc')
+      find('#sizeheader a').click
+      expect(page.find('#sizeheader a')[:class]).to eq('current desc')
+    end
+
+    it 'can sort the pet list age column by asc/desc' do
+      owner_register
+      create_a_dog
+      create_a_dog_2
+      create_a_dog_3
+      find('#Logout').click
+      renter_register
+      expect(page.find('#nameheader a')[:class]).to eq('current asc')
+      find('#ageheader a').click
+      expect(page.find('#ageheader a')[:class]).to eq('current asc')
+      find('#ageheader a').click
+      expect(page.find('#ageheader a')[:class]).to eq('current desc')
+    end
+
+    it 'can sort the pet list location column by asc/desc' do
+      owner_register
+      create_a_dog
+      create_a_dog_2
+      create_a_dog_3
+      find('#Logout').click
+      renter_register
+      expect(page.find('#nameheader a')[:class]).to eq('current asc')
+      find('#zipcodeheader a').click
+      expect(page.find('#zipcodeheader a')[:class]).to eq('current asc')
+      find('#zipcodeheader a').click
+      expect(page.find('#zipcodeheader a')[:class]).to eq('current desc')
+    end
+
+
 
     # methods
 
@@ -214,7 +284,32 @@ RSpec.feature "PetsApis", type: :feature do
       attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
       click_on 'Create Pet'
     end
+
+    def create_a_dog_2
+      find("#navbar_user_name").click
+      click_link('New Pet')
+      fill_in 'pet[name]', with: 'Woof'
+      fill_in 'pet[breed]', with: 'Shitsu'
+      find('#pet_size').find(:xpath, 'option[1]').select_option
+      fill_in 'pet[age]', with: '4'
+      fill_in 'pet_zipcode', with: '92122'
+      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+      click_on 'Create Pet'
+    end
+
+    def create_a_dog_3
+      find("#navbar_user_name").click
+      click_link('New Pet')
+      fill_in 'pet[name]', with: 'Sam'
+      fill_in 'pet[breed]', with: 'Golden Retriever'
+      find('#pet_size').find(:xpath, 'option[3]').select_option
+      fill_in 'pet[age]', with: '1'
+      fill_in 'pet_zipcode', with: '92037'
+      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+      click_on 'Create Pet'
+    end
   end
+
 
 
 end # the end for RSpec.feature "PetsApis", type: :feature do
