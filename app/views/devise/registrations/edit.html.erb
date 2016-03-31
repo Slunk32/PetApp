@@ -30,6 +30,17 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+  <!-- This adds paperclip to our edit form -->
+</br>
+  <div class="field">
+      <%= f.label :avatar %>
+</br>
+
+      <div class="col-sm-6">
+          <%= f.file_field :avatar %>
+      </div>
+  </div>
+  </br>
   <!-- Put in current password to accept changes  -->
   <div class="field">
     <%= f.label :current_password %><br />

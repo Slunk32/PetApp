@@ -14,13 +14,13 @@
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-        <li class="active"><a href="/pets">View Pets<span class="sr-only">(current)</span></a></li>
+        <li><a href="/pets">View Pets<span class="sr-only">(current)</span></a></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
         <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbar_user_name"><%= current_user.email %><span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbar_user_name"><%= image_tag(current_user.avatar.url(:thumb))%>       <%= current_user.email %><span class="caret"></span></a>
         <ul class="dropdown-menu">
           <% if current_user.user_type == "Owner" %>
             <li><%= link_to "Your Profile (Owner)", user_path(current_user.id) %></li>
