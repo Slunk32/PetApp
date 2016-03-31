@@ -6,7 +6,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.where(user: current_user)
+    @appointments = current_user.appointments
   end
 
   # GET /appointments/1
@@ -16,56 +16,74 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
-    @appointment = Appointment.new
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
+    end
   end
 
   # GET /appointments/1/edit
   def edit
+    if current_user.user_type == "Renter"  && @appointment.user == current_user
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
+    end
   end
 
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new#(appointment_params)
-    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
-
-
-    respond_to do |format|
-        if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new, notice: 'WRONG!' }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity}
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new#(appointment_params)
+      @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
+      respond_to do |format|
+          if @appointment.save
+            format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+            format.json { render :show, status: :created, location: @appointment }
+          else
+            format.html { render :new, notice: 'WRONG!' }
+            format.json { render json: @appointment.errors, status: :unprocessable_entity}
+          end
       end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
-    respond_to do |format|
-      if @appointment.update(appointment_params)
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @appointment }
-      else
-        format.html { render :edit }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+    if current_user.user_type == "Renter" && @appointment.user == current_user
+      respond_to do |format|
+        if @appointment.update(appointment_params)
+          format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
+          format.json { render :show, status: :ok, location: @appointment }
+        else
+          format.html { render :edit }
+          format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 
   # DELETE /appointments/1
   # DELETE /appointments/1.json
   def destroy
-    @appointment.destroy
-    respond_to do |format|
-      format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.user_type == "Renter" && @appointment.user == current_user
+      @appointment.destroy
+      respond_to do |format|
+        format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 

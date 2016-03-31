@@ -27,53 +27,73 @@ class PetsController < ApplicationController
 
   # GET /pets/new
   def new
-    @pet = current_user.pets.build
+    if current_user.user_type == "Owner"
+      @pet = current_user.pets.build
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
+    end
   end
 
   # GET /pets/1/edit
   def edit
+    if current_user.user_type == "Owner" && @pet.user == current_user
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
+    end
   end
 
   # POST /pets
   # POST /pets.json
   def create
-    @pet = current_user.pets.build(pet_params)
-    @pet.name = @pet.name.capitalize
-    @pet.breed = @pet.breed.capitalize
+    if current_user.user_type == "Owner"
+      @pet = current_user.pets.build(pet_params)
+      @pet.name = @pet.name.capitalize
+      @pet.breed = @pet.breed.capitalize
 
-    respond_to do |format|
-      if @pet.save
-        format.html { redirect_to @pet, notice: 'Pet was successfully created.' }
-        format.json { render :show, status: :created, location: @pet }
-      else
-        format.html { render :new }
-        format.json { render json: @pet.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @pet.save
+          format.html { redirect_to @pet, notice: 'Pet was successfully created.' }
+          format.json { render :show, status: :created, location: @pet }
+        else
+          format.html { render :new }
+          format.json { render json: @pet.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 
   # PATCH/PUT /pets/1
   # PATCH/PUT /pets/1.json
   def update
-    respond_to do |format|
-      if @pet.update(pet_params)
-        format.html { redirect_to @pet, notice: 'Pet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pet }
-      else
-        format.html { render :edit }
-        format.json { render json: @pet.errors, status: :unprocessable_entity }
+    if current_user.user_type == "Owner" && @pet.user == current_user
+      respond_to do |format|
+        if @pet.update(pet_params)
+          format.html { redirect_to @pet, notice: 'Pet was successfully updated.' }
+          format.json { render :show, status: :ok, location: @pet }
+        else
+          format.html { render :edit }
+          format.json { render json: @pet.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 
   # DELETE /pets/1
   # DELETE /pets/1.json
   def destroy
-    @pet.personalities.destroy_all
-    @pet.destroy
-    respond_to do |format|
-      format.html { redirect_to pets_url, notice: 'Pet was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.user_type == "Owner" && @pet.user == current_user
+      @pet.personalities.destroy_all
+      @pet.destroy
+      respond_to do |format|
+        format.html { redirect_to pets_url, notice: 'Pet was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to '/', notice: 'You do not have access to this page.'
     end
   end
 
