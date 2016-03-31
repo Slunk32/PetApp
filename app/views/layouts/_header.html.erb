@@ -28,9 +28,8 @@
             <li><a href="/pets/new">New Pet</a></li>
           <% else %>
             <li><%= link_to "Your Profile (Renter)", user_path(current_user.id) %></li>
-            <li><a href="/appointments">Your Appointments</a></li>
           <% end %>
-          <li><a href="#">Schedule</a></li>
+          <li><a href="/appointments">Your Appointments</a></li>
         </ul>
       </li>
           <li><a href="#">Contact</a></li>

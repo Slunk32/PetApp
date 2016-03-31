@@ -5,25 +5,29 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = current_user.appointments
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-   #@appointment = Appointment.find(params[:id])
-   if @appointment.pet.user == current_user || @appointment.user == current_user
-     # good
-   else
-     redirect_to '/welcome/index'
-   end
+  #  #@appointment = Appointment.find(params[:id])
+  #  if @appointment.pet.user == current_user || @appointment.user == current_user
+   #
+  #  else
+  #    redirect_to '/welcome/index'
+  #  end
  end
 
   # GET /appointments/new
   def new
-    @appointment = Appointment.new
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
+    else
+      redirect_to '/'
+    end
   end
 
   # GET /appointments/1/edit
@@ -33,19 +37,23 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new#(appointment_params)
-    @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
-    @appointment.pet = Pet.find(params[:pet_id])
-    @appointment.user = current_user
+    if current_user.user_type == "Renter"
+      @appointment = Appointment.new#(appointment_params)
+      @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
+      @appointment.pet = Pet.find(params[:pet_id])
+      @appointment.user = current_user
 
-    respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @appointment.save
+          format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+          format.json { render :show, status: :created, location: @appointment }
+        else
+          format.html { render :new }
+          format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to '/'
     end
   end
 
