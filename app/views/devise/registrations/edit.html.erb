@@ -20,6 +20,11 @@
       <%= f.select :user_type, ['Renter', 'Owner'] %>
     <% end %>
   </div>
+  <!-- Allows a user to add an address -->
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
   <!-- This allows you to edit your password -->
   <div class="field">
     <%= f.label :password %> </br><i>(leave blank if you don't want to change it)</i><br />
@@ -38,11 +43,8 @@
   </div>
 
   <!-- This adds paperclip to our edit form -->
-</br>
   <div class="field">
-      <%= f.label :avatar %>
-</br>
-
+      <%= f.label :avatar %><br />
       <div class="col-sm-6">
           <%= f.file_field :avatar %>
       </div>
@@ -54,10 +56,9 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
   <!-- Submit action -->
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <div class="field">
+    <%= f.submit "Update", :class => "btn edit_btn" %>
   </div>
-
   <!-- <%# button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %> -->
 
   <% end %>

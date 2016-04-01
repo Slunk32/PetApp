@@ -1,13 +1,12 @@
 #headingfont {
-  margin-top: -2.5%;
-  margin-bottom: 4%;
+  margin-top: -5%;
+  margin-bottom: -1.1%;
   font-family: 'Oleo Script', cursive;
   color: rgb(82,82,82);
   text-shadow: 3px 3px white;
   font-size: 50pt;
   text-align: center;
 }
-
 input:focus,
 select:focus,
 textarea:focus,
@@ -86,6 +85,24 @@ a {
   border: 1px solid rgb(201, 201, 201);
   background-color: #FCFCFC;
   text-indent: 10px;
+}
+
+#user_current_password {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+}
+
+#user_address {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+}
+
+#user_avatar {
+
 }
 
 /* changes the size of the user uploaded animal image */
