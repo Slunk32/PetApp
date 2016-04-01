@@ -27,6 +27,14 @@
   </br>
     <!-- This is the div containing our Google Map -->
 
+  <p>
+    <strong>Emergency Contact:</strong>
+    <%= @user.phone_number %>
+  </p>
+
+  <div class="link-wrap">
+
+  <div class="edit_btn">
 
     <%= link_to 'Edit', edit_user_registration_path, :class => "btn edit_btn" %>
   </div>

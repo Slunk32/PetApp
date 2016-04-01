@@ -35,6 +35,13 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <!-- This allows you to edit your phone number -->
+  <div class="field">
+    <%= f.label :phone_number %> (Emergency Contact)<br>
+    <%= f.text_field :phone_number, placeholder: "1-234-567-8910" %>
+  </div>
+
   <!-- This adds paperclip to our edit form -->
   <div class="field">
       <%= f.label :avatar %><br />

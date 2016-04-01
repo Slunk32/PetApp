@@ -6,13 +6,30 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = current_user.appointments
+    # If user is an owner, show owner's pets' Appointments
+    if current_user.user_type == "Owner"
+      # finds all the pets of the current user
+      pets = current_user.pets
+      # creates an empty array that will be stored in instance var appointments
+      @appointments = []
+      # goes through each pet record for that owner
+      pets.each do |pet|
+        # and then goes through each record of that owner's pets' appointments
+        pet.appointments.each do |appointment|
+          # and pushes them (the appointments) in to the empty array @appointments
+          @appointments << appointment
+        end
+      end
+    # If user is a renter, show renter's appointments
+    elsif current_user.user_type == "Renter"
+      @appointments = current_user.appointments
+    end
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
- end
+  end
 
   # GET /appointments/new
   def new
