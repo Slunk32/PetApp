@@ -19,12 +19,12 @@
 
     <% if current_user.user_type == "Renter" %>
       <p>
-        <strong>Dog Owner Emergency Contact:</strong>
+        <strong>Dog Owner Emergency Contact:</strong></br>
         <%= @appointment.pet.user.phone_number %>
       </p>
     <% else %>
       <p>
-        <strong>Dog Renter Emergency Contact:</strong>
+        <strong>Dog Renter Emergency Contact:</strong></br>
         <%= @appointment.user.phone_number %>
       </p>
     <% end %>

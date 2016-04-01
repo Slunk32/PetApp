@@ -357,6 +357,15 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('You do not have access to this page.')
     end
 
+    # Test for the phone numbers
+    it 'should see the emergency contact phone number of the Owner' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      expect(page).to have_content('3-333-333-3333')
+    end
 
 
 #_______________________________________________________________________________
@@ -371,6 +380,7 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       select "Renter", :from => "user[user_type]"
+      fill_in 'user_phone_number', with: '1-111-111-1111'
       click_button 'Sign up'
     end
 
@@ -381,6 +391,7 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       select "Renter", :from => "user[user_type]"
+      fill_in 'user_phone_number', with: '2-222-222-2222'
       click_button 'Sign up'
     end
 
@@ -391,6 +402,7 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       select "Owner", :from => "user[user_type]"
+      fill_in 'user_phone_number', with: '3-333-333-3333'
       click_button 'Sign up'
     end
 
