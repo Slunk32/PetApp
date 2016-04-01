@@ -1,6 +1,6 @@
 #headingfont {
-  margin-top: -5%;
-  margin-bottom: -1.1%;
+  margin-top: -90px;;
+  margin-bottom: -1%;
   font-family: 'Oleo Script', cursive;
   color: rgb(82,82,82);
   text-shadow: 3px 3px white;
@@ -61,40 +61,11 @@ a {
   margin: 0 auto;
   border-radius: 5%;
   padding-top: 5%;
-  margin-top: 80px;
+  margin-top: 40px;
   border: 3px solid rgb(82,82,82);
 }
 /*This section is the styling for our user input form*/
-#user_email {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#user_password {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-
-#user_password_confirmation {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#user_current_password {
-  border-radius: 25px;
-  border: 1px solid rgb(201, 201, 201);
-  background-color: #FCFCFC;
-  text-indent: 10px;
-}
-
-#user_address {
+#user_email, #user_password, #user_password_confirmation, #user_current_password, #user_address, #user_phone_number {
   border-radius: 25px;
   border: 1px solid rgb(201, 201, 201);
   background-color: #FCFCFC;

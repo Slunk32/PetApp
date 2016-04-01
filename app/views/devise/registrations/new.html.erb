@@ -32,8 +32,11 @@
   <div class="field">
     <%= f.label :address %> <br>
     <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
     <%= f.label :phone_number %> (Emergency Contact)<br>
-    <%= f.text_field :phone_number, placeholder: "1-234-567-8910" %>
+    <%= f.text_field :phone_number, placeholder: "(___) ___ - ____ " %>
   </div>
 
   <div class="actions">
