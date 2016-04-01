@@ -20,6 +20,11 @@
       <%= f.select :user_type, ['Renter', 'Owner'] %>
     <% end %>
   </div>
+  <!-- Allows a user to add an address -->
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
   <!-- This allows you to edit your password -->
   <div class="field">
     <%= f.label :password %> </br><i>(leave blank if you don't want to change it)</i><br />
@@ -31,11 +36,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
   <!-- This adds paperclip to our edit form -->
-</br>
   <div class="field">
-      <%= f.label :avatar %>
-</br>
-
+      <%= f.label :avatar %><br />
       <div class="col-sm-6">
           <%= f.file_field :avatar %>
       </div>

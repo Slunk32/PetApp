@@ -4,19 +4,29 @@
 <div class="signup-wrap">
   <div class="field">
     <p id="notice"><%= notice %></p>
-    <p>
-      <strong>Type:</strong>
-      <%= @user.user_type %>
-    </br>
-    </p>
 
     <p>
       <strong>Email:</strong>
       <%= @user.email %>
     </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @user.address %>
+    </br>
+    </p>
+
+    <p>
+      <strong>Type:</strong>
+      <%= @user.user_type %>
+    </br>
+    </p>
     <p>
       <%= image_tag(current_user.avatar.url(:medium)) %>
     </p>
+  </br>
+    <!-- This is the div containing our Google Map -->
+
 
     <%= link_to 'Edit', edit_user_registration_path, :class => "btn edit_btn" %>
   </div>

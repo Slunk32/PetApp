@@ -21,10 +21,15 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+hr {
+  margin-bottom: none;
+}
+
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  pointer-events: none;
 }
 
 /*The styling for our bottom banner*/
@@ -54,4 +59,9 @@ footer {
 
 #navbar_user_name img {
   border: 1px solid rgb(200, 200, 200);
+}
+
+#mapcontainer {
+  margin: 0 auto;
+  margin-bottom: 10px;
 }

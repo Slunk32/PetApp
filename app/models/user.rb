@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "150x150", :thumb => "32x32" }, :default_url => "/images/:style/homer.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  geocoded_by :address
+  after_validation :geocode
+
   # Omniauth allows our app to extract information from other API's
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -51,17 +51,6 @@ ActiveRecord::Schema.define(version: 20160331213441) do
     t.datetime "image_updated_at"
   end
 
-  create_table "reservations", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "pet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "reservations", ["pet_id"], name: "index_reservations_on_pet_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -75,9 +64,12 @@ ActiveRecord::Schema.define(version: 20160331213441) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "user_type"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "provider"
     t.string   "uid"
-    t.string   "user_type"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -90,5 +82,4 @@ ActiveRecord::Schema.define(version: 20160331213441) do
   add_foreign_key "appointments", "pets"
   add_foreign_key "appointments", "users"
   add_foreign_key "personalities", "pets"
-  add_foreign_key "reservations", "pets"
 end

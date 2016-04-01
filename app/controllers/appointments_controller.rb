@@ -20,6 +20,11 @@ class AppointmentsController < ApplicationController
       @appointment = Appointment.new
       @appointment.pet = Pet.find(params[:pet_id])
       @appointment.user = current_user
+      @hash = Gmaps4rails.build_markers(@appointment.pet.user) do |user, marker|
+        marker.lat user.latitude
+        marker.lng user.longitude
+        marker.infowindow user.address
+      end
     else
       redirect_to '/', notice: 'You do not have access to this page.'
     end
