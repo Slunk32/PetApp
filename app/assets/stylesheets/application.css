@@ -25,6 +25,7 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  pointer-events: none;
 }
 
 /*The styling for our bottom banner*/
