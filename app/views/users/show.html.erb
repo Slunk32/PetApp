@@ -17,7 +17,15 @@
     <%= image_tag(current_user.avatar.url(:medium)) %>
   </p>
 
+  <p>
+    <strong>Emergency Contact:</strong>
+    <%= @user.phone_number %>
+  </p>
+
+  <div class="link-wrap">
+
   <div class="edit_btn">
+
     <%= link_to 'Edit', edit_user_registration_path %>
   </div>
 </div>

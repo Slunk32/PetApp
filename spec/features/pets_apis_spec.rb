@@ -5,16 +5,19 @@ require 'rails_helper'
 
 RSpec.feature "PetsApis", type: :feature do
 
+  #_______________________________________________________________________________
+  # AS AN OWNER
+  #_______________________________________________________________________________
   describe "As an owner I" do
 
     #test for logging in
-    it "should be able to login successfully for a renter" do
+    it "should be able to login successfully" do
       owner_register
       click_on 'Logout'
-      login
+      owner_login
     end
 
-    it "should be able to register successfully for an owner" do
+    it "should be able to register successfully" do
       owner_register
     end
 
@@ -32,7 +35,6 @@ RSpec.feature "PetsApis", type: :feature do
     it 'should see the new pet in the listing' do
       owner_register
       create_a_dog
-      click_on 'Back'
       expect(page).to have_content('Bob')
       expect(page).to have_content('Collie')
       expect(page).to have_content('Medium')
@@ -43,7 +45,6 @@ RSpec.feature "PetsApis", type: :feature do
     it 'should be able to update the dog info' do
       owner_register
       create_a_dog
-      click_on 'Back'
       click_link 'edit_link'
       fill_in 'pet[name]', with: 'Roland'
       fill_in 'pet[breed]', with: 'German Shephard'
@@ -134,6 +135,56 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('You do not have access to this page.')
     end
 
+    # Test for the phone numbers
+    it 'should see the emergency contact phone number of the Owner' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      expect(page).to have_content('3-333-333-3333')
+      logout
+      owner_login
+    end
+
+    # Test for the phone numbers
+    it 'should view all appointments for one pet' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      expect(page).to have_content('3-333-333-3333')
+      logout
+      owner_register_2
+      create_a_dog_2
+      logout
+      renter_login
+      create_an_appointment
+
+      # owner_login #owner_register_2
+      # expect(page).to have_content('Dog Listing')
+      # find("#navbar_user_name").click
+      # click_link('Your Appointments')
+      # expect(page).to have_content('Listing Appointments')
+
+    end
+    # made Dog-
+    # log out-
+    # make renter-
+    # create Appointments-
+    # logout-
+    # make new owner -
+    # make dog -
+    # logout -
+    # login w renter -
+    # make appt w new dog
+    # logout
+    # login- 1st owner
+    # view Appointments
+    # expect contect to not have new dog.
+
+
     # Rebecca's code to upload a new user and and image with paperclip
     # it "will allow a user to enter an email address, password, password confirm, upload an avatar and register" do
     #   visit "/users/sign_up"
@@ -146,55 +197,12 @@ RSpec.feature "PetsApis", type: :feature do
     # end
 
 
-    #---------------methods for testing------------------------
-    def owner_register
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'vince@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Owner", :from => "user[user_type]"
-      click_button 'Sign up'
-    end
 
-    def owner_register_2
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'yosef@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Owner", :from => "user[user_type]"
-      click_button 'Sign up'
-    end
-
-    def login
-      visit '/welcome/index'
-      #login button on login form is a link? and is has a uppercase 'in'
-      click_on 'Log In'
-      fill_in 'user[email]', with: 'vince@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      #login button on login form is a link? and is has a lowercase 'in'
-      click_link 'Log in'
-    end
-
-    def create_a_dog
-      find("#navbar_user_name").click
-      click_link('New Pet')
-      fill_in 'pet[name]', with: 'Bob'
-      fill_in 'pet[breed]', with: 'Collie'
-      find('#pet_size').find(:xpath, 'option[3]').select_option
-      fill_in 'pet[age]', with: '5'
-      fill_in 'pet_zipcode', with: '92111'
-      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
-      click_on 'Create Pet'
-    end
   end # the end for describe "As an owner I can" do
 
-#_______________________________________________________________________________
-#_______________________________________________________________________________
-
-
-
+  #_______________________________________________________________________________
+  # AS A RENTER
+  #_______________________________________________________________________________
 
   describe "As a renter I" do
 
@@ -357,109 +365,20 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('You do not have access to this page.')
     end
 
-
-
-#_______________________________________________________________________________
-#_______________________________________________________________________________
-
-    # methods
-
-    def renter_register
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'andrew@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Renter", :from => "user[user_type]"
-      click_button 'Sign up'
+    # Test for the phone numbers
+    it 'should see the emergency contact phone number of the Owner' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      expect(page).to have_content('3-333-333-3333')
     end
+  end # the end for describe "As a renter I" do
 
-    def renter_register_2
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'shmuck@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Renter", :from => "user[user_type]"
-      click_button 'Sign up'
-    end
-
-    def owner_register
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'vince@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Owner", :from => "user[user_type]"
-      click_button 'Sign up'
-    end
-
-    def login
-      visit '/welcome/index'
-      #login button on login form is a link? and is has a uppercase 'in'
-      click_on 'Log In'
-      fill_in 'user[email]', with: 'vince@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      #login button on login form is a link? and is has a lowercase 'in'
-      click_link 'Log in'
-    end
-
-    def create_a_dog
-      find("#navbar_user_name").click
-      click_link('New Pet')
-      fill_in 'pet[name]', with: 'Bob'
-      fill_in 'pet[breed]', with: 'Collie'
-      find('#pet_size').find(:xpath, 'option[3]').select_option
-      fill_in 'pet[age]', with: '5'
-      fill_in 'pet_zipcode', with: '92111'
-      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
-      click_on 'Create Pet'
-      click_on 'Back'
-    end
-
-    def create_an_appointment
-      page.find("#show_link").click
-      expect(page).to have_content('New Appointment')
-      expect(page).to have_content('Bob')
-      expect(page).to have_content('andrew@gmail.com')
-      click_link 'New Appointment'
-      expect(page).to have_content('Date')
-      fill_in 'appointment[date]', with: '03/30/2016'
-      expect(page).to have_content('Bob')
-      expect(page).to have_content('andrew@gmail.com')
-      click_on 'Create Appointment'
-      expect(page).to have_content("Appointment was successfully created.")
-      expect(page).to have_content('March 30, 2016')
-    end
-
-    def logout
-      find('#Logout').click
-    end
-
-    def create_a_dog_2
-      find("#navbar_user_name").click
-      click_link('New Pet')
-      fill_in 'pet[name]', with: 'Woof'
-      fill_in 'pet[breed]', with: 'Shitsu'
-      find('#pet_size').find(:xpath, 'option[1]').select_option
-      fill_in 'pet[age]', with: '4'
-      fill_in 'pet_zipcode', with: '92122'
-      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
-      click_on 'Create Pet'
-    end
-
-    def create_a_dog_3
-      find("#navbar_user_name").click
-      click_link('New Pet')
-      fill_in 'pet[name]', with: 'Sam'
-      fill_in 'pet[breed]', with: 'Golden Retriever'
-      find('#pet_size').find(:xpath, 'option[3]').select_option
-      fill_in 'pet[age]', with: '1'
-      fill_in 'pet_zipcode', with: '92037'
-      attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
-      click_on 'Create Pet'
-    end
-  end
+  #_______________________________________________________________________________
+  # AS A User
+  #_______________________________________________________________________________
 
   describe "As a User I" do
     it "can update my profile with an avatar" do
@@ -472,16 +391,130 @@ RSpec.feature "PetsApis", type: :feature do
       click_button 'Update'
     end
 
-    def renter_register
-      visit '/welcome/index'
-      click_on 'Register'
-      fill_in 'user[email]', with: 'andrew@gmail.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      select "Renter", :from => "user[user_type]"
-      click_button 'Sign up'
-    end
+  end # the end for describe "As a User I" do
+
+  #_______________________________________________________________________________
+  #---------------methods for testing------------------------
+  #_______________________________________________________________________________
+
+  def renter_register
+    visit '/welcome/index'
+    click_on 'Register'
+    fill_in 'user[email]', with: 'andrew@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    select "Renter", :from => "user[user_type]"
+    fill_in 'user_phone_number', with: '1-111-111-1111'
+    click_button 'Sign up'
   end
 
+  def renter_register_2
+    visit '/welcome/index'
+    click_on 'Register'
+    fill_in 'user[email]', with: 'shmuck@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    select "Renter", :from => "user[user_type]"
+    fill_in 'user_phone_number', with: '2-222-222-2222'
+    click_button 'Sign up'
+  end
+
+  def owner_register
+    visit '/welcome/index'
+    click_on 'Register'
+    fill_in 'user[email]', with: 'vince@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    select "Owner", :from => "user[user_type]"
+    fill_in 'user_phone_number', with: '3-333-333-3333'
+    click_button 'Sign up'
+  end
+
+  def owner_register_2
+    visit '/welcome/index'
+    click_on 'Register'
+    fill_in 'user[email]', with: 'yosef@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    select "Owner", :from => "user[user_type]"
+    fill_in 'user_phone_number', with: '4-444-444-4444'
+    click_button 'Sign up'
+  end
+
+  def renter_login
+    visit '/welcome/index'
+    #login button on login form is a link? and is has a uppercase 'in'
+    click_on 'Log In'
+    fill_in 'user[email]', with: 'andrew@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    #login button on login form is a link? and is has a lowercase 'in'
+    click_button 'Log in'
+  end
+
+  def owner_login
+    visit '/welcome/index'
+    #login button on login form is a link? and is has a uppercase 'in'
+    click_on 'Log In'
+    fill_in 'user[email]', with: 'vince@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    #login button on login form is a link? and is has a lowercase 'in'
+    click_button 'Log in'
+  end
+
+  def create_a_dog
+    find("#navbar_user_name").click
+    click_link('New Pet')
+    fill_in 'pet[name]', with: 'Bob'
+    fill_in 'pet[breed]', with: 'Collie'
+    find('#pet_size').find(:xpath, 'option[3]').select_option
+    fill_in 'pet[age]', with: '5'
+    fill_in 'pet_zipcode', with: '92111'
+    attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+    click_on 'Create Pet'
+    click_on 'Back'
+  end
+
+  def create_an_appointment
+    page.find("#show_link").click
+    expect(page).to have_content('New Appointment')
+    expect(page).to have_content('Bob')
+    expect(page).to have_content('andrew@gmail.com')
+    click_link 'New Appointment'
+    expect(page).to have_content('Date')
+    fill_in 'appointment[date]', with: '03/30/2016'
+    expect(page).to have_content('Bob')
+    expect(page).to have_content('andrew@gmail.com')
+    click_on 'Create Appointment'
+    expect(page).to have_content("Appointment was successfully created.")
+    expect(page).to have_content('March 30, 2016')
+  end
+
+  def logout
+    find('#Logout').click
+  end
+
+  def create_a_dog_2
+    find("#navbar_user_name").click
+    click_link('New Pet')
+    fill_in 'pet[name]', with: 'Woof'
+    fill_in 'pet[breed]', with: 'Shitsu'
+    find('#pet_size').find(:xpath, 'option[1]').select_option
+    fill_in 'pet[age]', with: '4'
+    fill_in 'pet_zipcode', with: '92122'
+    attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+    click_on 'Create Pet'
+  end
+
+  def create_a_dog_3
+    find("#navbar_user_name").click
+    click_link('New Pet')
+    fill_in 'pet[name]', with: 'Sam'
+    fill_in 'pet[breed]', with: 'Golden Retriever'
+    find('#pet_size').find(:xpath, 'option[3]').select_option
+    fill_in 'pet[age]', with: '1'
+    fill_in 'pet_zipcode', with: '92037'
+    attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
+    click_on 'Create Pet'
+  end
 
 end # the end for RSpec.feature "PetsApis", type: :feature do
