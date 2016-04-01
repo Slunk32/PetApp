@@ -27,8 +27,11 @@
 
   </div>
   <div class="link-wrap">
-    <%= link_to 'New Appointment', new_pet_appointment_path(@pet), :class => "btn btn-" %></br>
-    <%= link_to 'Edit', edit_pet_path(@pet) %> |
+    <% if current_user.user_type == "Renter" %>
+      <%= link_to 'New Appointment', new_pet_appointment_path(@pet), :class => "edit_btn" %></br>
+    <% else %>
+      <%= link_to 'Edit', edit_pet_path(@pet) %> |
+    <% end %>
     <%= link_to 'Back', pets_path %>
   </div>
 </div>

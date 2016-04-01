@@ -1,32 +1,37 @@
 <h2 id="headingfont">Your Profile</h2>
+<hr>
 <!-- This is our show profile page -->
 <div class="signup-wrap">
   <div class="field">
     <p id="notice"><%= notice %></p>
-  <p>
-    <strong>Type:</strong>
-    <%= @user.user_type %>
-  </br>
-  </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
-  <p>
-    <%= image_tag(current_user.avatar.url(:medium)) %>
-  </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-  <p>
-    <strong>Emergency Contact:</strong>
-    <%= @user.phone_number %>
-  </p>
+    <p>
+      <strong>Address:</strong>
+      <%= @user.address %>
+    </p>
 
-  <div class="link-wrap">
+    <p>
+      <strong>Type:</strong>
+      <%= @user.user_type %>
+    </p>
 
-  <div class="edit_btn">
+    <p>
+      <strong>Emergency Contact:</strong>
+      <%= @user.phone_number %>
+    </p>
 
-    <%= link_to 'Edit', edit_user_registration_path %>
+    <p>
+      <%= image_tag(current_user.avatar.url(:medium)) %>
+    </p> 
+
+    <div class="link-wrap">
+
+      <%= link_to 'Edit', edit_user_registration_path, :class => "btn edit_btn" %>
+    </div>
   </div>
-</div>
 </div>
