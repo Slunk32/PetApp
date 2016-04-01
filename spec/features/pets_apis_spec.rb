@@ -170,7 +170,7 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     # Test for the phone numbers *WIP*
-    skip 'should view all appointments for one pet' do
+    it 'should view all appointments for one pet' do
       owner_register
       create_a_dog
       logout
@@ -184,7 +184,8 @@ RSpec.feature "PetsApis", type: :feature do
       renter_login
       #----problem area---
       #here the page should click on the second dog
-      page.find(:css, '#show_link', match: :first).click
+      visit '/pets/3'
+      # page.find(:css, '#show_link', match: :first).click
       #-------------------
       expect(page).to have_content('Bob')
 
