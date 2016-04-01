@@ -44,10 +44,8 @@
 
   <!-- This adds paperclip to our edit form -->
   <div class="field">
-      <%= f.label :avatar %><br />
-      <div class="col-sm-6">
-          <%= f.file_field :avatar %>
-      </div>
+      <%= f.label :avatar, value: "Upload Avatar" %><br />
+      <%= f.file_field :avatar, class: "fa fa-camera file_upload" %>
   </div>
   </br>
   <!-- Put in current password to accept changes  -->

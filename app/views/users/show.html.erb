@@ -13,29 +13,25 @@
     <p>
       <strong>Address:</strong>
       <%= @user.address %>
-    </br>
     </p>
 
     <p>
       <strong>Type:</strong>
       <%= @user.user_type %>
-    </br>
     </p>
+
+    <p>
+      <strong>Emergency Contact:</strong>
+      <%= @user.phone_number %>
+    </p>
+
     <p>
       <%= image_tag(current_user.avatar.url(:medium)) %>
-    </p>
-  </br>
-    <!-- This is the div containing our Google Map -->
+    </p> 
 
-  <p>
-    <strong>Emergency Contact:</strong>
-    <%= @user.phone_number %>
-  </p>
+    <div class="link-wrap">
 
-  <div class="link-wrap">
-
-  <div class="edit_btn">
-
-    <%= link_to 'Edit', edit_user_registration_path, :class => "btn edit_btn" %>
+      <%= link_to 'Edit', edit_user_registration_path, :class => "btn edit_btn" %>
+    </div>
   </div>
 </div>
