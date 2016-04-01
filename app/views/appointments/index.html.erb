@@ -13,7 +13,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @appointments) do |appointment| %>
-            <td><%= link_to appointment.date.strftime("%B %d, %Y"), appointment  %></td>
+            <td><%= link_to appointment.date.strftime("%B %d, %Y"), appointment, :id => 'show_app'  %></td>
             <td><%= link_to appointment.pet.name, appointment.pet %></td>
             <td><%= link_to appointment.user.email, appointment.user %></td>
         <td><%= link_to edit_appointment_path(appointment) do %>
