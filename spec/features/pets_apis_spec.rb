@@ -391,6 +391,23 @@ RSpec.feature "PetsApis", type: :feature do
       create_an_appointment
       expect(page).to have_content('3-333-333-3333')
     end
+
+    it 'should view appiontments I made so I can keep track of when I will be taking care of a dog' do
+      owner_register
+      create_a_dog
+      logout
+      renter_register
+      create_an_appointment
+      click_on 'Back'
+      click_on 'Back'
+      create_an_appointment_2
+      click_on 'Back'
+      click_on 'Back'
+      find("#navbar_user_name").click
+      click_link('Your Appointments')
+      expect(page).to have_content('March 30, 2016')
+      expect(page).to have_content('March 27, 2016')
+    end
   end # the end for describe "As a renter I" do
 
   #_______________________________________________________________________________
@@ -513,12 +530,12 @@ RSpec.feature "PetsApis", type: :feature do
     expect(page).to have_content('andrew@gmail.com')
     click_link 'New Appointment'
     expect(page).to have_content('Date')
-    fill_in 'appointment[date]', with: '03/30/2016'
+    fill_in 'appointment[date]', with: '03/27/2016'
     expect(page).to have_content('Bob')
     expect(page).to have_content('andrew@gmail.com')
     click_on 'Create Appointment'
     expect(page).to have_content("Appointment was successfully created.")
-    expect(page).to have_content('March 30, 2016')
+    expect(page).to have_content('March 27, 2016')
   end
 
   def logout
