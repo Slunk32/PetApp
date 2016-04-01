@@ -136,7 +136,7 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     # Test for the phone numbers
-    it 'should see the emergency contact phone number of the Owner' do
+    it 'should see the emergency contact phone number of the Renter' do
       owner_register
       create_a_dog
       logout
@@ -145,9 +145,14 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('3-333-333-3333')
       logout
       owner_login
+      find("#navbar_user_name").click
+      click_link('Your Appointments')
+      expect(page).to have_content('Listing Appointments')
+      page.find(:css, '#show_app', match: :first).click
+      expect(page).to have_content('1-111-111-1111')
     end
 
-    # Test for the phone numbers
+    # Test for the phone numbers *WIP*
     it 'should view all appointments for one pet' do
       owner_register
       create_a_dog
@@ -160,29 +165,41 @@ RSpec.feature "PetsApis", type: :feature do
       create_a_dog_2
       logout
       renter_login
-      create_an_appointment
+      #----problem area---
+      #here the page should click on the second dog
+      page.find(:css, '#show_link', match: :first).click
+      #-------------------
+      expect(page).to have_content('Bob')
 
+      # this is what we will test for once clicking one the second dog works
+      #expect(page).to have_content('Woof')
+
+      #saved code in case we need it
+      # create_an_appointment
       # owner_login #owner_register_2
       # expect(page).to have_content('Dog Listing')
       # find("#navbar_user_name").click
       # click_link('Your Appointments')
       # expect(page).to have_content('Listing Appointments')
 
+      #checklist for this test
+      # (-) means its done
+      # made Dog-
+      # log out-
+      # make renter-
+      # create Appointments-
+      # logout-
+      # make new owner -
+      # make dog -
+      # logout -
+      # login w renter -
+      # make appt w new dog
+      # logout
+      # login- 1st owner
+      # view Appointments
+      # expect contect to not have new dog.
     end
-    # made Dog-
-    # log out-
-    # make renter-
-    # create Appointments-
-    # logout-
-    # make new owner -
-    # make dog -
-    # logout -
-    # login w renter -
-    # make appt w new dog
-    # logout
-    # login- 1st owner
-    # view Appointments
-    # expect contect to not have new dog.
+
 
 
     # Rebecca's code to upload a new user and and image with paperclip
@@ -475,6 +492,21 @@ RSpec.feature "PetsApis", type: :feature do
   end
 
   def create_an_appointment
+    page.find("#show_link").click
+    expect(page).to have_content('New Appointment')
+    expect(page).to have_content('Bob')
+    expect(page).to have_content('andrew@gmail.com')
+    click_link 'New Appointment'
+    expect(page).to have_content('Date')
+    fill_in 'appointment[date]', with: '03/30/2016'
+    expect(page).to have_content('Bob')
+    expect(page).to have_content('andrew@gmail.com')
+    click_on 'Create Appointment'
+    expect(page).to have_content("Appointment was successfully created.")
+    expect(page).to have_content('March 30, 2016')
+  end
+
+  def create_an_appointment_2
     page.find("#show_link").click
     expect(page).to have_content('New Appointment')
     expect(page).to have_content('Bob')
