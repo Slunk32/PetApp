@@ -22,12 +22,12 @@
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbar_user_name"><%= image_tag(current_user.avatar.url(:thumb))%>       <%= current_user.email %><span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <% if current_user.user_type == "Owner" %>
-            <li><%= link_to "Your Profile (Owner)", user_path(current_user.id) %></li>
+          <% if current_user.user_type == "Pet Owner" %>
+            <li><%= link_to "Your Profile (Pet Owner)", user_path(current_user.id) %></li>
             <li><a href="/pets">Pets</a></li>
             <li><a href="/pets/new">New Pet</a></li>
           <% else %>
-            <li><%= link_to "Your Profile (Renter)", user_path(current_user.id) %></li>
+            <li><%= link_to "Your Profile (Pet Pal)", user_path(current_user.id) %></li>
           <% end %>
           <li><a href="/appointments">Your Appointments</a></li>
         </ul>
