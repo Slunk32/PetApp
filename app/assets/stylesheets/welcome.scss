@@ -6,7 +6,7 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:700);
 
 // Accordion Height
-$a-height: 250px;
+$a-height: 360px;
 
 // Position text along bottom
 $text-offset: $a-height - 90;
@@ -100,13 +100,13 @@ h1 {
             text-transform:uppercase;
             margin-bottom:2px;
 
-            top:$text-offset;
+            // top:$text-offset;
 
           }
 
           p {
 
-            top:$text-offset;
+            // top:$text-offset;
             font-size:13.5px;
 
           }
