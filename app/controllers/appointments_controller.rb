@@ -64,13 +64,13 @@ class AppointmentsController < ApplicationController
       @appointment.pet = Pet.find(params[:pet_id])
       @appointment.user = current_user
       respond_to do |format|
-          if @appointment.save
-            format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-            format.json { render :show, status: :created, location: @appointment }
-          else
-            format.html { render :new, notice: 'WRONG!' }
-            format.json { render json: @appointment.errors, status: :unprocessable_entity}
-          end
+        if @appointment.save
+          format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+          format.json { render :show, status: :created, location: @appointment }
+        else
+          format.html { render :new, notice: 'WRONG!' }
+          format.json { render json: @appointment.errors, status: :unprocessable_entity}
+        end
       end
     else
       redirect_to '/', notice: 'You do not have access to this page.'
