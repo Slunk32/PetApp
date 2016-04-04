@@ -10,24 +10,29 @@
       <%= @user.email %>
     </p>
 
-    <p>
-      <strong>Address:</strong>
-      <%= @user.address %>
-    </p>
+
+    <% if @user.address.present? %>
+      <p>
+        <strong>Address:</strong>
+        <%= @user.address %>
+      </p>
+    <% end %>
 
     <p>
       <strong>Type:</strong>
       <%= @user.user_type %>
     </p>
 
-    <p>
-      <strong>Emergency Contact:</strong>
-      <%= @user.phone_number %>
-    </p>
+    <% if @user.phone_number.present? %>
+      <p>
+        <strong>Emergency Contact:</strong>
+        <%= @user.phone_number %>
+      </p>
+    <% end %>
 
     <p>
       <%= image_tag(current_user.avatar.url(:medium)) %>
-    </p> 
+    </p>
 
     <div class="link-wrap">
 
