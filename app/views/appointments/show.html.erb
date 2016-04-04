@@ -19,7 +19,7 @@
 
     <% if current_user.user_type == "Pet Pal" %>
       <p>
-        <strong>Dog Owner Emergency Contact:</strong></br>
+        <strong>Dog pet_owner Emergency Contact:</strong></br>
         <%= @appointment.pet.user.phone_number %>
       </p>
     <% else %>

@@ -10,14 +10,14 @@
         <th class="listingheader" id="sizeheader"><%= sortable "size", "Size" %></th>
         <th class="listingheader" id="ageheader"><%= sortable "age", "Age" %></th>
         <th class="listingheader" id="zipcodeheader"><%= sortable "zipcode", "Zipcode" %></th>
-        <% if current_user.user_type == "Owner" %>
+        <% if current_user.user_type == "Pet Owner" %>
           <th class="listingheader" colspan="2">Edit</th>
         <% end %>
       </tr>
     </thead>
 
     <tbody>
-      <% if current_user.user_type == "Owner" %>
+      <% if current_user.user_type == "Pet Owner" %>
         <% @current_user.pets.each do |pet| %>
           <tr class="listingrow">
             <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>

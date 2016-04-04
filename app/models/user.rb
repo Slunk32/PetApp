@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  TYPE_OWNER = "Owner"
+  TYPE_pet_owner = "Pet Owner"
   TYPE_pal = "Pet Pal"
 
   # Include default devise modules. Others available are:
