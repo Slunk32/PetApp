@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   TYPE_OWNER = "Owner"
-  TYPE_RENTER = "Renter"
+  TYPE_pal = "Pet Pal"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.user_type = "Renter"
+      user.user_type = "Pet Pal"
       user.password = Devise.friendly_token[0,20]
     end
   end
