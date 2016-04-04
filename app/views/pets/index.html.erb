@@ -1,4 +1,9 @@
 <h1 id="headingfont">Dog Listing</h1>
+<% if current_user.user_type == "Pet Owner" %>
+<p id = 'listinginfo'> Below is a list of your registered therapy dogs. To add a new dog to to the list, click on your username in the top right corner and select 'New Pet' from the dropdown menu.   </p>
+<% elsif current_user.user_type == "Pet Pal" %>
+<p id = 'listinginfo'> Below is a list of the available therapy dogs. To set up an appointment, go to the dog's profile by clicking on the dog's picture and clicking 'New Appointment'.  </p>
+<%end %>
 <hr>
 <div class="petlisting">
   <table>

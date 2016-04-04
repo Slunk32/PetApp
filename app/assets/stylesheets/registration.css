@@ -76,6 +76,10 @@ a {
 
 }
 
+#infotext {
+  font-size: 10pt;
+}
+
 input.btn.edit_btn {
   margin-top: 10px;;
 }
