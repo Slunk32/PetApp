@@ -22,9 +22,10 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     # Tests for visiting and making a new dog
-    it "should be able to visit the pets listing page" do
+    it "should be able to visit the pets listing page and check for description text" do
       pet_owner_register
       expect(page).to have_content('Dog Listing')
+      expect(page).to have_content("Below is a list of your registered therapy dogs. To add a new dog to to the list, click on your username in the top right corner and select 'New Pet' from the dropdown menu.")
     end
 
     it 'should be able to create a dog' do
@@ -241,11 +242,17 @@ RSpec.feature "PetsApis", type: :feature do
   # AS A pal
   #_______________________________________________________________________________
 
-  describe "As a pal I" do
+  describe "As a Pet Pal I" do
 
     it "should be able to register successfully for an pet_owner" do
       visit '/welcome/index'
       pal_register
+    end
+
+    it "should be able to visit the pets listing page and check for description text" do
+      pal_register
+      expect(page).to have_content('Dog Listing')
+      expect(page).to have_content("Below is a list of the available therapy dogs. To set up an appointment, go to the dog's profile by clicking on the dog's picture and clicking 'New Appointment'.")
     end
 
     it 'should schedule a pet appointment' do
