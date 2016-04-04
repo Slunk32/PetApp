@@ -171,7 +171,7 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('March 27, 2016')
     end
 
-    # This test is also pending becuase we cannot click on the second picture 
+    # This test is also pending becuase we cannot click on the second picture
     # Test for the phone numbers *WIP*
     skip 'should view all appointments for one pet' do
 
@@ -188,7 +188,7 @@ RSpec.feature "PetsApis", type: :feature do
       pal_login
       #----problem area----------------------
       #here the page should click on the second dog
-      visit '/pets/3'
+      page.find("table tbody tr a:eq(2)").click
       # page.find(:css, '#show_link', match: :first).click
       #--------------------------------------
       expect(page).to have_content('Bob')
@@ -234,6 +234,8 @@ RSpec.feature "PetsApis", type: :feature do
     #   click_button 'Sign Up'
     #   expect(page).to have_content("Welcome! You have signed up successfully.")
     # end
+
+    # page.find("table tbody tr a:eq(2)").click
 
 
 
