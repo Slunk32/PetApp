@@ -6,34 +6,34 @@ require 'rails_helper'
 RSpec.feature "PetsApis", type: :feature do
 
   #_______________________________________________________________________________
-  # AS AN OWNER
+  # AS AN pet_owner
   #_______________________________________________________________________________
-  describe "As an owner I" do
+  describe "As an pet_owner I" do
 
     #test for logging in
     it "should be able to login successfully" do
-      owner_register
+      pet_owner_register
       click_on 'Logout'
-      owner_login
+      pet_owner_login
     end
 
     it "should be able to register successfully" do
-      owner_register
+      pet_owner_register
     end
 
     # Tests for visiting and making a new dog
     it "should be able to visit the pets listing page" do
-      owner_register
+      pet_owner_register
       expect(page).to have_content('Dog Listing')
     end
 
     it 'should be able to create a dog' do
-      owner_register
+      pet_owner_register
       create_a_dog
     end
 
     it 'should see the new pet in the listing' do
-      owner_register
+      pet_owner_register
       create_a_dog
       expect(page).to have_content('Bob')
       expect(page).to have_content('Collie')
@@ -43,7 +43,7 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'should be able to update the dog info' do
-      owner_register
+      pet_owner_register
       create_a_dog
       click_link 'edit_link'
       fill_in 'pet[name]', with: 'Roland'
@@ -54,8 +54,8 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('German Shephard')
     end
 
-    it 'should only see the Owners dog that they made (as an owner)' do
-      owner_register
+    it 'should only see the pet_owners dog that they made (as an pet_owner)' do
+      pet_owner_register
       create_a_dog
       find('#Logout').click
       visit '/welcome/index'
@@ -63,7 +63,7 @@ RSpec.feature "PetsApis", type: :feature do
       fill_in 'user[email]', with: 'russ@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
-      select "Owner", :from => "user[user_type]"
+      select "Pet Owner", :from => "user[user_type]"
       click_button 'Sign up'
       expect(page).to_not have_content('Bob')
       expect(page).to_not have_content('Collie')
@@ -89,7 +89,7 @@ RSpec.feature "PetsApis", type: :feature do
 
     # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
     skip 'should be able to delete the dog info' do
-      owner_register
+      pet_owner_register
       create_a_dog
       click_on 'Back'
       find("#delete_link").click
@@ -105,7 +105,7 @@ RSpec.feature "PetsApis", type: :feature do
     #--------------------------Pending------------------------------------------
 
     it 'should not not be able to create a pet without an image' do
-      owner_register
+      pet_owner_register
       find("#navbar_user_name").click
       click_link('New Pet')
       fill_in 'pet[name]', with: 'Bob'
@@ -118,17 +118,17 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'should not be able to edit a pet they did not create' do
-      owner_register
+      pet_owner_register
       create_a_dog
       find('#Logout').click
-      owner_register_2
+      pet_owner_register_2
       visit '/pets/' + Pet.last.id.to_s + '/edit'
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('You do not have access to this page.')
     end
 
     it "should not be able to schedule an appointment" do
-      owner_register
+      pet_owner_register
       create_a_dog
       visit '/pets/' + Pet.last.id.to_s + '/appointments/new'
       expect(page).to have_current_path(root_path)
@@ -136,15 +136,15 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     # Test for the phone numbers
-    it 'should see the emergency contact phone number of the Renter' do
-      owner_register
+    it 'should see the emergency contact phone number of the pal' do
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       expect(page).to have_content('3-333-333-3333')
       logout
-      owner_login
+      pet_owner_login
       find("#navbar_user_name").click
       click_link('Your Appointments')
       expect(page).to have_content('Listing Appointments')
@@ -153,10 +153,10 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     skip 'should view all the appointments for dogs I own so its easier to keep track of' do
-      owner_register
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       click_on 'Back'
       click_on 'Back'
@@ -169,21 +169,25 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('March 27, 2016')
     end
 
+
+    # Test for the phone numbers *WIP*
     skip 'should view all appointments for one pet' do
-      owner_register
+
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       expect(page).to have_content('3-333-333-3333')
       logout
-      owner_register_2
+      pet_owner_register_2
       create_a_dog_2
       logout
-      renter_login
+      pal_login
       #----problem area---
       #here the page should click on the second dog
-      page.find(:css, '#show_link', match: :first).click
+      visit '/pets/3'
+      # page.find(:css, '#show_link', match: :first).click
       #-------------------
       expect(page).to have_content('Bob')
 
@@ -192,7 +196,7 @@ RSpec.feature "PetsApis", type: :feature do
 
       #saved code in case we need it
       # create_an_appointment
-      # owner_login #owner_register_2
+      # pet_owner_login #pet_owner_register_2
       # expect(page).to have_content('Dog Listing')
       # find("#navbar_user_name").click
       # click_link('Your Appointments')
@@ -202,16 +206,16 @@ RSpec.feature "PetsApis", type: :feature do
       # (-) means its done
       # made Dog-
       # log out-
-      # make renter-
+      # make pal-
       # create Appointments-
       # logout-
-      # make new owner -
+      # make new pet_owner -
       # make dog -
       # logout -
-      # login w renter -
+      # login w pal -
       # make appt w new dog
       # logout
-      # login- 1st owner
+      # login- 1st pet_owner
       # view Appointments
       # expect contect to not have new dog.
     end
@@ -231,40 +235,40 @@ RSpec.feature "PetsApis", type: :feature do
 
 
 
-  end # the end for describe "As an owner I can" do
+  end # the end for describe "As an pet_owner I can" do
 
   #_______________________________________________________________________________
-  # AS A RENTER
+  # AS A pal
   #_______________________________________________________________________________
 
-  describe "As a renter I" do
+  describe "As a pal I" do
 
-    it "should be able to register successfully for an owner" do
+    it "should be able to register successfully for an pet_owner" do
       visit '/welcome/index'
-      renter_register
+      pal_register
     end
 
     it 'should schedule a pet appointment' do
-      owner_register
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
     end
 
     it 'should show all appointments' do
-      owner_register
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
     end
 
     it 'should only allow dogs to be book with a specific time once' do
-      owner_register
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       click_on 'Back'
       click_link 'New Appointment'
@@ -276,18 +280,18 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content("Date already exists")
     end
 
-    it 'should only allow one renter to book a specific dog at a spcific date' do
-      owner_register
+    it 'should only allow one pal to book a specific dog at a spcific date' do
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       logout
       click_on 'Register'
       fill_in 'user[email]', with: 'russ@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
-      select "Renter", :from => "user[user_type]"
+      select "Pet Pal", :from => "user[user_type]"
       click_button 'Sign up'
       page.find("#show_link").click
       expect(page).to have_content('New Appointment')
@@ -301,24 +305,24 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'can sort the pet list name column by asc/desc' do
-      owner_register
+      pet_owner_register
       create_a_dog
       create_a_dog_2
       create_a_dog_3
       find('#Logout').click
-      renter_register
+      pal_register
       expect(page.find('#nameheader a')[:class]).to eq('current asc')
       find('#nameheader a').click
       expect(page.find('#nameheader a')[:class]).to eq('current desc')
     end
 
     it 'can sort the pet list breed column by asc/desc' do
-      owner_register
+      pet_owner_register
       create_a_dog
       create_a_dog_2
       create_a_dog_3
       find('#Logout').click
-      renter_register
+      pal_register
       expect(page.find('#nameheader a')[:class]).to eq('current asc')
       find('#breedheader a').click
       expect(page.find('#breedheader a')[:class]).to eq('current asc')
@@ -327,12 +331,12 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'can sort the pet list size column by asc/desc' do
-      owner_register
+      pet_owner_register
       create_a_dog
       create_a_dog_2
       create_a_dog_3
       find('#Logout').click
-      renter_register
+      pal_register
       expect(page.find('#nameheader a')[:class]).to eq('current asc')
       find('#sizeheader a').click
       expect(page.find('#sizeheader a')[:class]).to eq('current asc')
@@ -341,12 +345,12 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'can sort the pet list age column by asc/desc' do
-      owner_register
+      pet_owner_register
       create_a_dog
       create_a_dog_2
       create_a_dog_3
       find('#Logout').click
-      renter_register
+      pal_register
       expect(page.find('#nameheader a')[:class]).to eq('current asc')
       find('#ageheader a').click
       expect(page.find('#ageheader a')[:class]).to eq('current asc')
@@ -355,12 +359,12 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'can sort the pet list location column by asc/desc' do
-      owner_register
+      pet_owner_register
       create_a_dog
       create_a_dog_2
       create_a_dog_3
       find('#Logout').click
-      renter_register
+      pal_register
       expect(page.find('#nameheader a')[:class]).to eq('current asc')
       find('#zipcodeheader a').click
       expect(page.find('#zipcodeheader a')[:class]).to eq('current asc')
@@ -369,50 +373,50 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'cannot create a pet' do
-      renter_register
+      pal_register
       visit '/pets/new'
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('You do not have access to this page.')
     end
 
     it 'cannot edit a pet' do
-      owner_register
+      pet_owner_register
       create_a_dog
       find('#Logout').click
-      renter_register
+      pal_register
       visit '/pets/' + Pet.last.id.to_s + '/edit'
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('You do not have access to this page.')
     end
 
-    it 'should not be able to edit another renters appointment' do
-      owner_register
+    it 'should not be able to edit another pals appointment' do
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       logout
-      renter_register_2
+      pal_register_2
       visit '/appointments/' + Appointment.last.id.to_s + '/edit'
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('You do not have access to this page.')
     end
 
     # Test for the phone numbers
-    it 'should see the emergency contact phone number of the Owner' do
-      owner_register
+    it 'should see the emergency contact phone number of the pet_owner' do
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       expect(page).to have_content('3-333-333-3333')
     end
 
-    it 'should see the dog owners location on a map when I go to create an appt' do
-      owner_register
+    it 'should see the dog pet_owners location on a map when I go to create an appt' do
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       page.find(:css, "#show_link", match: :first).click
       expect(page).to have_content('New Appointment')
       expect(page).to have_content('Bob')
@@ -426,10 +430,10 @@ RSpec.feature "PetsApis", type: :feature do
     end
 
     it 'should view appiontments I made so I can keep track of when I will be taking care of a dog' do
-      owner_register
+      pet_owner_register
       create_a_dog
       logout
-      renter_register
+      pal_register
       create_an_appointment
       click_on 'Back'
       click_on 'Back'
@@ -441,7 +445,7 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('March 30, 2016')
       expect(page).to have_content('March 27, 2016')
     end
-  end # the end for describe "As a renter I" do
+  end # the end for describe "As a pal I" do
 
   #_______________________________________________________________________________
   # AS A User
@@ -449,9 +453,9 @@ RSpec.feature "PetsApis", type: :feature do
 
   describe "As a User I" do
     it "can update my profile with an avatar" do
-      renter_register
+      pal_register
       find("#navbar_user_name").click
-      click_link('Your Profile (Renter)')
+      click_link('Your Profile (Pet Pal)')
       click_link('Edit')
       attach_file('user_avatar', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
       fill_in 'user[current_password]', with: 'password'
@@ -469,53 +473,53 @@ RSpec.feature "PetsApis", type: :feature do
   #---------------methods for testing------------------------
   #_______________________________________________________________________________
 
-  def renter_register
+  def pal_register
     visit '/welcome/index'
     click_on 'Register'
     fill_in 'user[email]', with: 'andrew@gmail.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
-    select "Renter", :from => "user[user_type]"
+    select "Pet Pal", :from => "user[user_type]"
     fill_in 'user_phone_number', with: '1-111-111-1111'
     click_button 'Sign up'
   end
 
-  def renter_register_2
+  def pal_register_2
     visit '/welcome/index'
     click_on 'Register'
     fill_in 'user[email]', with: 'shmuck@gmail.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
-    select "Renter", :from => "user[user_type]"
+    select "Pet Pal", :from => "user[user_type]"
     fill_in 'user_phone_number', with: '2-222-222-2222'
     click_button 'Sign up'
   end
 
-  def owner_register
+  def pet_owner_register
     visit '/welcome/index'
     click_on 'Register'
     fill_in 'user[email]', with: 'vince@gmail.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
     fill_in 'user[address]', with: '8303 Ray Street, San Diego CA'
-    select "Owner", :from => "user[user_type]"
+    select "Pet Owner", :from => "user[user_type]"
     fill_in 'user_phone_number', with: '3-333-333-3333'
     click_button 'Sign up'
   end
 
-  def owner_register_2
+  def pet_owner_register_2
     visit '/welcome/index'
     click_on 'Register'
     fill_in 'user[email]', with: 'yosef@gmail.com'
     fill_in 'user[password]', with: 'password'
     fill_in 'user[password_confirmation]', with: 'password'
     fill_in 'user[address]', with: '8303 Ray Street, San Diego CA'
-    select "Owner", :from => "user[user_type]"
+    select "Pet Owner", :from => "user[user_type]"
     fill_in 'user_phone_number', with: '4-444-444-4444'
     click_button 'Sign up'
   end
 
-  def renter_login
+  def pal_login
     visit '/welcome/index'
     #login button on login form is a link? and is has a uppercase 'in'
     click_on 'Log In'
@@ -525,7 +529,7 @@ RSpec.feature "PetsApis", type: :feature do
     click_button 'Log in'
   end
 
-  def owner_login
+  def pet_owner_login
     visit '/welcome/index'
     #login button on login form is a link? and is has a uppercase 'in'
     click_on 'Log In'

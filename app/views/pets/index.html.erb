@@ -1,4 +1,9 @@
 <h1 id="headingfont">Dog Listing</h1>
+<% if current_user.user_type == "Pet Owner" %>
+<p id = 'listinginfo'> Below is a list of your registered therapy dogs. To add a new dog to to the list, click on your username in the top right corner and select 'New Pet' from the dropdown menu.   </p>
+<% elsif current_user.user_type == "Pet Pal" %>
+<p id = 'listinginfo'> Below is a list of the available therapy dogs. To set up an appointment, go to the dog's profile by clicking on the dog's picture and clicking 'New Appointment'.  </p>
+<%end %>
 <hr>
 <div class="petlisting">
   <table>
@@ -10,14 +15,14 @@
         <th class="listingheader" id="sizeheader"><%= sortable "size", "Size" %></th>
         <th class="listingheader" id="ageheader"><%= sortable "age", "Age" %></th>
         <th class="listingheader" id="zipcodeheader"><%= sortable "zipcode", "Zipcode" %></th>
-        <% if current_user.user_type == "Owner" %>
+        <% if current_user.user_type == "Pet Owner" %>
           <th class="listingheader" colspan="2">Edit</th>
         <% end %>
       </tr>
     </thead>
 
     <tbody>
-      <% if current_user.user_type == "Owner" %>
+      <% if current_user.user_type == "Pet Owner" %>
         <% @current_user.pets.each do |pet| %>
           <tr class="listingrow">
             <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>
@@ -38,7 +43,7 @@
             </td>
           </tr>
         <% end %>
-      <% elsif current_user.user_type == "Renter" %>
+      <% elsif current_user.user_type == "Pet Pal" %>
         <% @pets.each do |pet| %>
           <tr class="listingrow">
             <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>

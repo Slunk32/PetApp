@@ -6,22 +6,22 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    # If user is an owner, show owner's pets' Appointments
-    if current_user.user_type == "Owner"
+    # If user is an pet_owner, show pet_owner's pets' Appointments
+    if current_user.user_type == "Pet Owner"
       # finds all the pets of the current user
       pets = current_user.pets
       # creates an empty array that will be stored in instance var appointments
       @appointments = []
-      # goes through each pet record for that owner
+      # goes through each pet record for that pet_owner
       pets.each do |pet|
-        # and then goes through each record of that owner's pets' appointments
+        # and then goes through each record of that pet_owner's pets' appointments
         pet.appointments.each do |appointment|
           # and pushes them (the appointments) in to the empty array @appointments
           @appointments << appointment
         end
       end
-    # If user is a renter, show renter's appointments
-    elsif current_user.user_type == "Renter"
+    # If user is a pal, show pal's appointments
+    elsif current_user.user_type == "Pet Pal"
       @appointments = current_user.appointments
     end
   end
@@ -33,7 +33,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
-    if current_user.user_type == "Renter"
+    if current_user.user_type == "Pet Pal"
       @appointment = Appointment.new
       @appointment.pet = Pet.find(params[:pet_id])
       @appointment.user = current_user
@@ -49,7 +49,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
-    if current_user.user_type == "Renter"  && @appointment.user == current_user
+    if current_user.user_type == "Pet Pal"  && @appointment.user == current_user
     else
       redirect_to '/', notice: 'You do not have access to this page.'
     end
@@ -58,7 +58,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    if current_user.user_type == "Renter"
+    if current_user.user_type == "Pet Pal"
       @appointment = Appointment.new#(appointment_params)
       @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
       @appointment.pet = Pet.find(params[:pet_id])
@@ -80,7 +80,7 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
-    if current_user.user_type == "Renter" && @appointment.user == current_user
+    if current_user.user_type == "Pet Pal" && @appointment.user == current_user
       respond_to do |format|
         if @appointment.update(appointment_params)
           format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
@@ -98,7 +98,7 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1
   # DELETE /appointments/1.json
   def destroy
-    if current_user.user_type == "Renter" && @appointment.user == current_user
+    if current_user.user_type == "Pet Pal" && @appointment.user == current_user
       @appointment.destroy
       respond_to do |format|
         format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }

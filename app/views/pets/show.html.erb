@@ -27,7 +27,7 @@
 
   </div>
   <div class="link-wrap">
-    <% if current_user.user_type == "Renter" %>
+    <% if current_user.user_type == "Pet Pal" %>
       <%= link_to 'New Appointment', new_pet_appointment_path(@pet), :class => "btn btn-primary" %></br>
     <% else %>
       <%= link_to 'Edit', edit_pet_path(@pet) %> |

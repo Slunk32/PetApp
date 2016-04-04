@@ -13,13 +13,13 @@
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-  <!-- This allows to user to edit their status "renter" or "owner-->
+  <!-- This allows to user to edit their status "Pet Pal" or "pet_owner-->
   <div class="field">
     <%= f.label :user_type %><br>
-    <% if current_user.user_type == "Owner" %>
-      <%= f.select :user_type, ['Owner', 'Renter'] %>
+    <% if current_user.user_type == "Pet Owner" %>
+      <%= f.select :user_type, ['Pet Owner', 'Pet Pal'] %>
     <% else %>
-      <%= f.select :user_type, ['Renter', 'Owner'] %>
+      <%= f.select :user_type, ['Pet Pal', 'Pet Owner'] %>
     <% end %>
   </div>
   <!-- Allows a user to add an address -->
