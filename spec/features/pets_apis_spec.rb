@@ -469,6 +469,11 @@ RSpec.feature "PetsApis", type: :feature do
       click_button 'Update'
     end
 
+    it "can visit the about page" do
+      visit '/welcome/about'
+      expect(page).to have_content('About Us')
+    end
+
   end # the end for describe "As a User I" do
 
   #_______________________________________________________________________________

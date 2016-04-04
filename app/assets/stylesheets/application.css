@@ -53,6 +53,11 @@ footer {
   background-color: green;
 }
 
+
+.form-group {
+  text-align: center;
+}
+
 #navbar_user_name {
   padding: 9px;
 }
