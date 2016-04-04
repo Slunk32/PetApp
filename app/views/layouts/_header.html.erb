@@ -32,10 +32,10 @@
           <li><a href="/appointments">Your Appointments</a></li>
         </ul>
       </li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/welcome/about">About</a></li>
           <li><%= link_to('Logout', destroy_user_session_path, :id => 'Logout', :method => :delete) %></li>
         <% else %>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/welcome/about">About</a></li>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
           <li><%= link_to "Log in", new_user_session_path %></li>
           <li><%= link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
