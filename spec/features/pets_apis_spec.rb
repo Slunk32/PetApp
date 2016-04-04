@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# shows you how the tests are running
+# Selenium code to see how the tests are running
 #, :js => true
 
 RSpec.feature "PetsApis", type: :feature do
@@ -88,23 +88,6 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('92117')
     end
 
-    # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
-    skip 'should be able to delete the dog info' do
-      pet_owner_register
-      create_a_dog
-      click_on 'Back'
-      find("#delete_link").click
-      #---problem area----
-      accept_alert do
-        click_link('OK')
-      end
-      #-------------------
-      expect(page).not_to have_content('Bob')
-      expect(page).to have_content('Pet was successfully destroyed.')
-
-    end
-    #--------------------------Pending------------------------------------------
-
     it 'should not not be able to create a pet without an image' do
       pet_owner_register
       find("#navbar_user_name").click
@@ -153,6 +136,24 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('1-111-111-1111')
     end
 
+    #--------------------------Pending------------------------------------------
+
+    # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
+    skip 'should be able to delete the dog info' do
+      pet_owner_register
+      create_a_dog
+      click_on 'Back'
+      find("#delete_link").click
+      #---problem area----
+      accept_alert do
+        click_link('OK')
+      end
+      #-------------------
+      expect(page).not_to have_content('Bob')
+      expect(page).to have_content('Pet was successfully destroyed.')
+    end
+
+    #This test is pending becuase the dog listing page iterates through a loop and all of the dog pictures have the same ID, therefore it is difficult to click on the second instance of the loop.
     skip 'should view all the appointments for dogs I own so its easier to keep track of' do
       pet_owner_register
       create_a_dog
@@ -170,7 +171,7 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('March 27, 2016')
     end
 
-
+    # This test is also pending becuase we cannot click on the second picture 
     # Test for the phone numbers *WIP*
     skip 'should view all appointments for one pet' do
 
@@ -185,11 +186,11 @@ RSpec.feature "PetsApis", type: :feature do
       create_a_dog_2
       logout
       pal_login
-      #----problem area---
+      #----problem area----------------------
       #here the page should click on the second dog
       visit '/pets/3'
       # page.find(:css, '#show_link', match: :first).click
-      #-------------------
+      #--------------------------------------
       expect(page).to have_content('Bob')
 
       # this is what we will test for once clicking one the second dog works
@@ -458,6 +459,7 @@ RSpec.feature "PetsApis", type: :feature do
   # AS A User
   #_______________________________________________________________________________
 
+  # Test for updating your profile
   describe "As a User I" do
     it "can update my profile with an avatar" do
       pal_register
@@ -477,7 +479,7 @@ RSpec.feature "PetsApis", type: :feature do
   end # the end for describe "As a User I" do
 
   #_______________________________________________________________________________
-  #---------------methods for testing------------------------
+  #                      methods for testing
   #_______________________________________________________________________________
 
   def pal_register
