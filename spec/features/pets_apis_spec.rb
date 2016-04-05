@@ -24,7 +24,7 @@ RSpec.feature "PetsApis", type: :feature do
     # Tests for visiting and making a new dog
     it "should be able to visit the pets listing page" do
       pet_owner_register
-      expect(page).to have_content('Dog Listing')
+      expect(page).to have_content('Pup Listing')
     end
 
     it 'should be able to create a dog' do
@@ -389,19 +389,6 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('You do not have access to this page.')
     end
 
-    it 'should not be able to edit another pals appointment' do
-      pet_owner_register
-      create_a_dog
-      logout
-      pal_register
-      create_an_appointment
-      logout
-      pal_register_2
-      visit '/appointments/' + Appointment.last.id.to_s + '/edit'
-      expect(page).to have_current_path(root_path)
-      expect(page).to have_content('You do not have access to this page.')
-    end
-
     # Test for the phone numbers
     it 'should see the emergency contact phone number of the pet_owner' do
       pet_owner_register
@@ -464,7 +451,7 @@ RSpec.feature "PetsApis", type: :feature do
 
     it "can visit the about page" do
       visit '/welcome/about'
-      expect(page).to have_content('About Us')
+      expect(page).to have_content('About POOCH')
     end
 
   end # the end for describe "As a User I" do
