@@ -1,31 +1,33 @@
 class PetsController < ApplicationController
+  # runs set pet method only for these processes: show edit update destory
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  # if user is not signed in then redirects to log in page
   before_action :check_auth
   skip_before_action :authenticate_user!
+  # creates methods that are pre-loaded on the page so that we can sort columns
   helper_method :sort_column, :sort_direction
 
-
+  # runs in before_action
   def check_auth
       unless user_signed_in?
           redirect_to welcome_index_path
       end
   end
 
-  # GET /pets
-  # GET /pets.json
+  # helper method is run when page is loaded to help sorting
   def index
     @pets = Pet.order(sort_column + " " + sort_direction)
   end
 
+  # sorts column in either ascending or descending
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
-  # GET /pets/1
-  # GET /pets/1.json
+
   def show
   end
 
-  # GET /pets/new
+  # only allows Pet Owner's to access create pet page.
   def new
     if current_user.user_type == "Pet Owner"
       @pet = current_user.pets.build
@@ -34,7 +36,7 @@ class PetsController < ApplicationController
     end
   end
 
-  # GET /pets/1/edit
+  # only allows Pet Owner to edit a pet
   def edit
     if current_user.user_type == "Pet Owner" && @pet.user == current_user
     else
@@ -42,8 +44,7 @@ class PetsController < ApplicationController
     end
   end
 
-  # POST /pets
-  # POST /pets.json
+  # this method runs when you click create pet button - and saves the pet.
   def create
     if current_user.user_type == "Pet Owner"
       @pet = current_user.pets.build(pet_params)
@@ -64,8 +65,7 @@ class PetsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /pets/1
-  # PATCH/PUT /pets/1.json
+  # method run when you click "update" and saves changes to pet
   def update
     if current_user.user_type == "Pet Owner" && @pet.user == current_user
       respond_to do |format|
@@ -82,8 +82,7 @@ class PetsController < ApplicationController
     end
   end
 
-  # DELETE /pets/1
-  # DELETE /pets/1.json
+  # method runs when you click the trashcan symbol and deletes pet from db
   def destroy
     if current_user.user_type == "Pet Owner" && @pet.user == current_user
       @pet.personalities.destroy_all
@@ -98,12 +97,11 @@ class PetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    #
     def set_pet
       @pet = Pet.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def pet_params
       params.require(:pet).permit(:name, :breed, :size, :age, :zipcode, :image)
     end

@@ -49,10 +49,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
-    if current_user.user_type == "Pet Pal"  && @appointment.user == current_user
-    else
-      redirect_to '/', notice: 'You do not have access to this page.'
-    end
+    redirect_to '/appointments', notice: 'You do not have access to this page.'
   end
 
   # POST /appointments
@@ -80,23 +77,19 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
-    if current_user.user_type == "Pet Pal" && @appointment.user == current_user
-      respond_to do |format|
-        # Fix this to find the appointment by id and reassign it to new date------------
-        # @appointment = Appointment.find by???????
-        # @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
-        #------------------------------------
-        if @appointment.update(appointment_params)
-          format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
-          format.json { render :show, status: :ok, location: @appointment }
-        else
-          format.html { render :edit }
-          format.json { render json: @appointment.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      redirect_to '/', notice: 'You do not have access to this page.'
-    end
+    # if current_user.user_type == "Pet Pal" && @appointment.user == current_user
+    #   respond_to do |format|
+    #     if @appointment.update(appointment_params)
+    #       format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
+    #       format.json { render :show, status: :ok, location: @appointment }
+    #     else
+    #       format.html { render :edit }
+    #       format.json { render json: @appointment.errors, status: :unprocessable_entity }
+    #     end
+    #   end
+    # else
+      redirect_to '/appointments', notice: 'You do not have access to this page.'
+    # end
   end
 
   # DELETE /appointments/1
