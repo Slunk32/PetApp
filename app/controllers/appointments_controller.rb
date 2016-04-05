@@ -82,6 +82,10 @@ class AppointmentsController < ApplicationController
   def update
     if current_user.user_type == "Pet Pal" && @appointment.user == current_user
       respond_to do |format|
+        # Fix this to find the appointment by id and reassign it to new date------------
+        # @appointment = Appointment.find by???????
+        # @appointment.date = Date.strptime(appointment_params[:date], '%m/%d/%Y')
+        #------------------------------------
         if @appointment.update(appointment_params)
           format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
           format.json { render :show, status: :ok, location: @appointment }
