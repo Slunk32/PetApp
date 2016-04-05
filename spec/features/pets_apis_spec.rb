@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-# shows you how the tests are running
+# Selenium code to see how the tests are running
 #, :js => true
+#save_and_open_page
 
 RSpec.feature "PetsApis", type: :feature do
 
@@ -88,23 +89,6 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('92117')
     end
 
-    # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
-    skip 'should be able to delete the dog info' do
-      pet_owner_register
-      create_a_dog
-      click_on 'Back'
-      find("#delete_link").click
-      #---problem area----
-      accept_alert do
-        click_link('OK')
-      end
-      #-------------------
-      expect(page).not_to have_content('Bob')
-      expect(page).to have_content('Pet was successfully destroyed.')
-
-    end
-    #--------------------------Pending------------------------------------------
-
     it 'should not not be able to create a pet without an image' do
       pet_owner_register
       find("#navbar_user_name").click
@@ -153,7 +137,24 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('1-111-111-1111')
     end
 
-    skip 'should view all the appointments for dogs I own so its easier to keep track of' do
+    #--------------------------Pending------------------------------------------
+
+    # This test is pending becuase selenium and capybara can't confirm the alert that pops up when It clicks delete.
+    skip 'should be able to delete the dog info' do
+      pet_owner_register
+      create_a_dog
+      click_on 'Back'
+      find("#delete_link").click
+      #---problem area----
+      accept_alert do
+        click_link('OK')
+      end
+      #-------------------
+      expect(page).not_to have_content('Bob')
+      expect(page).to have_content('Pet was successfully destroyed.')
+    end
+
+    it 'should view all the appointments for dogs I own so its easier to keep track of' do
       pet_owner_register
       create_a_dog
       logout
@@ -170,9 +171,9 @@ RSpec.feature "PetsApis", type: :feature do
       expect(page).to have_content('March 27, 2016')
     end
 
-
+    # This test is also pending becuase we cannot click on the second picture
     # Test for the phone numbers *WIP*
-    skip 'should view all appointments for one pet' do
+    it 'should view all appointments for one pet' do
 
       pet_owner_register
       create_a_dog
@@ -185,56 +186,29 @@ RSpec.feature "PetsApis", type: :feature do
       create_a_dog_2
       logout
       pal_login
-      #----problem area---
-      #here the page should click on the second dog
-      visit '/pets/3'
-      # page.find(:css, '#show_link', match: :first).click
-      #-------------------
-      expect(page).to have_content('Bob')
-
-      # this is what we will test for once clicking one the second dog works
-      #expect(page).to have_content('Woof')
-
-      #saved code in case we need it
-      # create_an_appointment
-      # pet_owner_login #pet_owner_register_2
-      # expect(page).to have_content('Dog Listing')
-      # find("#navbar_user_name").click
-      # click_link('Your Appointments')
-      # expect(page).to have_content('Listing Appointments')
-
-      #checklist for this test
-      # (-) means its done
-      # made Dog-
-      # log out-
-      # make pal-
-      # create Appointments-
-      # logout-
-      # make new pet_owner -
-      # make dog -
-      # logout -
-      # login w pal -
-      # make appt w new dog
-      # logout
-      # login- 1st pet_owner
-      # view Appointments
-      # expect contect to not have new dog.
+      page.find("table tbody tr:eq(2) td a").click
+      expect(page).to have_content('Woof')
+      expect(page).to have_content('Shitzu')
+      expect(page).to have_content('Small')
+      expect(page).to have_content('4')
+      expect(page).to have_content('New Appointment')
+      expect(page).to have_content('andrew@gmail.com')
+      click_link 'New Appointment'
+      expect(page).to have_content('Date')
+      fill_in 'appointment[date]', with: '03/27/2016'
+      expect(page).to have_content('Woof')
+      expect(page).to have_content('andrew@gmail.com')
+      click_on 'Create Appointment'
+      expect(page).to have_content("Appointment was successfully created.")
+      expect(page).to have_content('March 27, 2016')
+      logout
+      pet_owner_login
+      find("#navbar_user_name").click
+      click_link('Your Appointments')
+      expect(page).not_to have_content('Woof')
+      expect(page).not_to have_content('Shitzu')
+      expect(page).not_to have_content('March 27, 2016')
     end
-
-
-
-    # Rebecca's code to upload a new user and and image with paperclip
-    # it "will allow a user to enter an email address, password, password confirm, upload an avatar and register" do
-    #   visit "/users/sign_up"
-    #   fill_in 'Email', with: 'J@yahoo.com'
-    #   fill_in 'Password', with: 'password123'
-    #   fill_in 'Password confirmation', with: 'password123'
-    #   attach_file('user_avatar', '/Users/learn/Desktop/Coffeeshop-group-project/spec/Images/coffeecup.jpeg')
-    #   click_button 'Sign Up'
-    #   expect(page).to have_content("Welcome! You have signed up successfully.")
-    # end
-
-
 
   end # the end for describe "As an pet_owner I can" do
 
@@ -458,6 +432,7 @@ RSpec.feature "PetsApis", type: :feature do
   # AS A User
   #_______________________________________________________________________________
 
+  # Test for updating your profile
   describe "As a User I" do
     it "can update my profile with an avatar" do
       pal_register
@@ -477,7 +452,7 @@ RSpec.feature "PetsApis", type: :feature do
   end # the end for describe "As a User I" do
 
   #_______________________________________________________________________________
-  #---------------methods for testing------------------------
+  #                      methods for testing
   #_______________________________________________________________________________
 
   def pal_register
@@ -546,6 +521,7 @@ RSpec.feature "PetsApis", type: :feature do
     click_button 'Log in'
   end
 
+  #note to self, when selecting pet size, index number starts at 1 (1 = blank space, 2 = small, etc.). so this create a dog method is selecting Medium in the drop down list.
   def create_a_dog
     find("#navbar_user_name").click
     click_link('New Pet')
@@ -597,8 +573,8 @@ RSpec.feature "PetsApis", type: :feature do
     find("#navbar_user_name").click
     click_link('New Pet')
     fill_in 'pet[name]', with: 'Woof'
-    fill_in 'pet[breed]', with: 'Shitsu'
-    find('#pet_size').find(:xpath, 'option[1]').select_option
+    fill_in 'pet[breed]', with: 'Shitzu'
+    find('#pet_size').find(:xpath, 'option[2]').select_option
     fill_in 'pet[age]', with: '4'
     fill_in 'pet_zipcode', with: '92122'
     attach_file('paperclip_upload', '/Users/learn/desktop/Petapp/spec/img_test/animals-cute-dog-Favim.com-458661_large.jpg')
