@@ -66,6 +66,16 @@ thead > tr > th {
   width: 80px;
 }
 
+textarea {
+  border-radius: 25px;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: #FCFCFC;
+  text-indent: 10px;
+  width: 250px;
+  height: 170px;
+  resize: none;
+}
+
 .fa-camera {
   font-size: 40px;
 }

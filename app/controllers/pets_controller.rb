@@ -103,7 +103,7 @@ class PetsController < ApplicationController
     end
 
     def pet_params
-      params.require(:pet).permit(:name, :breed, :size, :age, :zipcode, :image)
+      params.require(:pet).permit(:name, :breed, :size, :age, :zipcode, :image, :description)
     end
 
     def sort_column
