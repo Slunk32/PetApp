@@ -1,3 +1,5 @@
+<!-- make an appointment page -->
+
 <%= form_for([@appointment.pet, @appointment], html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if @appointment.errors.any? %>
   <div class="alert alert-danger alert-dismissable" role="alert">
@@ -13,7 +15,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :date, class: "col-sm-2 control-label" %>
+    <%= f.label :date %>
     <div>
       <%= f.text_field :date, 'data-behaviour' => 'datepicker', :id => 'app_calendar', :required => true %>
       <script type="text/javascript">

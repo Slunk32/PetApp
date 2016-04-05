@@ -1,3 +1,5 @@
+<!-- lists all appointments for pup owners -->
+
 <h1 id="headingfont">Listing Appointments</h1>
 <hr>
 <div class="table-responsive listingappt">
@@ -16,9 +18,6 @@
             <td><%= link_to appointment.date.strftime("%B %d, %Y"), appointment, :id => 'show_app'  %></td>
             <td><%= link_to appointment.pet.name, appointment.pet %></td>
             <td><%= link_to appointment.user.email, appointment.user %></td>
-        <td><%= link_to edit_appointment_path(appointment) do %>
-          <i class="fa fa-pencil"></i>
-          <% end %></td>
         <td><%= link_to appointment, method: :delete, data: { confirm: 'Are you sure?' } do %>
         <i class="fa fa-trash"></i>
         <% end %></td>

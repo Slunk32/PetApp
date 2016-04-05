@@ -1,4 +1,5 @@
 class Pet < ActiveRecord::Base
+  # 
   has_many :personalities
   has_many :appointments
   belongs_to :user

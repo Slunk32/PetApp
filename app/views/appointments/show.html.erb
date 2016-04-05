@@ -1,3 +1,5 @@
+<!-- appointment confirmation page -->
+
 <h1 id="headingfont">Show Appointment</h1>
 <hr>
 <div class="signup-wrap">
@@ -19,12 +21,12 @@
 
     <% if current_user.user_type == "Pet Pal" %>
       <p>
-        <strong>Dog pet_owner Emergency Contact:</strong></br>
+        <strong>Pet Owner Emergency Contact:</strong></br>
         <%= @appointment.pet.user.phone_number %>
       </p>
     <% else %>
       <p>
-        <strong>Dog pal Emergency Contact:</strong></br>
+        <strong>Pal Emergency Contact:</strong></br>
         <%= @appointment.user.phone_number %>
       </p>
     <% end %>
