@@ -20,8 +20,11 @@
       <%= f.text_field :date, 'data-behaviour' => 'datepicker', :id => 'app_calendar', :required => true %>
       <script type="text/javascript">
       $(document).ready(function(){
-        $('[data-behaviour~=datepicker]').datepicker();
-      })
+        $('[data-behaviour~=datepicker]').datepicker({ dateFormat: 'MM-DD-YYYY' });
+        $.datepicker.setDefaults({
+          dateFormat: 'MM-DD-YYYY'
+        });
+      });
       </script>
     </div>
   </div>
