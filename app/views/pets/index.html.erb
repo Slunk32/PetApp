@@ -13,11 +13,11 @@
     <thead>
       <tr class="listingrow">
         <th class="listingheader"><%= "POOCH" %></th>
-        <th class="listingheader" id="nameheader"><%= sortable "name", "Name" %></th>
-        <th class="listingheader" id="breedheader"><%= sortable "breed", "Breed" %></th>
-        <th class="listingheader" id="sizeheader"><%= sortable "size", "Size" %></th>
-        <th class="listingheader" id="ageheader"><%= sortable "age", "Age" %></th>
-        <th class="listingheader" id="zipcodeheader"><%= sortable "zipcode", "Zipcode" %></th>
+        <th class="listingheader" id="nameheader"><%= sortable "name" %></th>
+        <th class="listingheader" id="breedheader"><%= sortable "breed" %></th>
+        <th class="listingheader" id="sizeheader"><%= sortable "size" %></th>
+        <th class="listingheader" id="ageheader"><%= sortable "age" %></th>
+        <th class="listingheader" id="zipcodeheader"><%= sortable "zipcode" %></th>
         <% if current_user.user_type == "Pet Owner" %>
           <th class="listingheader" colspan="2">Edit</th>
         <% end %>
@@ -25,38 +25,27 @@
     </thead>
 
     <tbody>
-      <% if current_user.user_type == "Pet Owner" %>
-        <% @current_user.pets.each do |pet| %>
-          <tr class="listingrow">
-            <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>
-            <td class="listingcell"><%= pet.name %></td>
-            <td class="listingcell"><%= pet.breed %></td>
-            <td class="listingcell"><%= pet.size %></td>
-            <td class="listingcell"><%= pet.age %></td>
-            <td class="listingcell"><%= pet.zipcode %></td>
-            <td class="action listingcell">
-              <%= link_to edit_pet_path(pet), :id => 'edit_link' do %>
-                <i class="fa fa-pencil"></i>
-              <% end %>
-            </td>
-            <td class="action listingcell">
-              <%= link_to pet, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <i class="fa fa-trash"></i>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      <% elsif current_user.user_type == "Pet Pal" %>
-        <% @pets.each do |pet| %>
-          <tr class="listingrow">
-            <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>
-            <td class="listingcell"><%= pet.name %></td>
-            <td class="listingcell"><%= pet.breed %></td>
-            <td class="listingcell"><%= pet.size %></td>
-            <td class="listingcell"><%= pet.age %></td>
-            <td class="listingcell"><%= pet.zipcode %></td>
-          </tr>
-        <% end %>
+      <% @pets.each do |pet| %>
+        <tr class="listingrow">
+          <td class="listingcell"><%= link_to image_tag(pet.image.url(:large)), pet, :class => "animalimg img-responsive", :id => 'show_link'%></td>
+          <td class="listingcell"><%= pet.name %></td>
+          <td class="listingcell"><%= pet.breed %></td>
+          <td class="listingcell"><%= pet.size %></td>
+          <td class="listingcell"><%= pet.age %></td>
+          <td class="listingcell"><%= pet.zipcode %></td>
+          <% if current_user.user_type == "Pet Owner" %>
+          <td class="action listingcell">
+            <%= link_to edit_pet_path(pet), :id => 'edit_link' do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+          </td>
+          <td class="action listingcell">
+            <%= link_to pet, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </td>
+          <% end %>
+        </tr>
       <% end %>
     </tbody>
   </table>

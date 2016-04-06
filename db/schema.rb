@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20160405213233) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean  "terms"
   end
 
   add_index "appointments", ["pet_id"], name: "index_appointments_on_pet_id", using: :btree

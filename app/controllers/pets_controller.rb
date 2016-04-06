@@ -16,7 +16,11 @@ class PetsController < ApplicationController
 
   # helper method is run when page is loaded to help sorting
   def index
-    @pets = Pet.order(sort_column + " " + sort_direction)
+    @pets = if current_user.user_type == "Pet Owner"
+      current_user.pets.order(sort_column + " " + sort_direction)
+    else
+      Pet.order(sort_column + " " + sort_direction)
+    end
   end
 
   # sorts column in either ascending or descending
